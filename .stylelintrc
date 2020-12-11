@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-airbnb",
+    "stylelint-config-styled-components"
+  ]
+}
