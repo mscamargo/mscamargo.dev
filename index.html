@@ -1,14 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Marcos Camargo | Senior Software Engineer at [BARECODE]</title>
+        <title>Marcos Camargo | Desenvolvedor Backend Sênior</title>
 
         <!-- DNS Prefetch -->
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="dns-prefetch" href="https://barecode.io" />
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://www.instagram.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
@@ -22,12 +21,12 @@
         />
 
         <!-- Preload critical image -->
-        <link rel="preload" as="image" href="./me.png" />
+        <link rel="preload" as="image" href="./me.webp" />
 
         <!-- SEO Meta Tags -->
         <meta
             name="description"
-            content="Senior Software Engineer at [BARECODE]"
+            content="Desenvolvedor Backend Sênior com 10+ anos de experiência em Node.js, TypeScript e NestJS. APIs, microsserviços e sistemas de alto volume."
         />
         <meta name="author" content="Marcos Camargo" />
         <meta name="theme-color" content="#121212" />
@@ -36,33 +35,40 @@
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://mscamargo.dev/" />
+        <meta property="og:locale" content="pt_BR" />
         <meta
             property="og:title"
-            content="Marcos Camargo | Senior Software Engineer at [BARECODE]"
+            content="Marcos Camargo | Desenvolvedor Backend Sênior"
         />
         <meta
             property="og:description"
-            content="Senior Software Engineer at [BARECODE]"
+            content="Desenvolvedor Backend Sênior com 10+ anos de experiência em Node.js, TypeScript e NestJS. APIs, microsserviços e sistemas de alto volume."
         />
-        <meta property="og:image" content="https://mscamargo.dev/me.png" />
+        <meta
+            property="og:image"
+            content="https://mscamargo.dev/og-preview.jpg"
+        />
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://mscamargo.dev/" />
         <meta
             property="twitter:title"
-            content="Marcos Camargo | Senior Software Engineer at [BARECODE]"
+            content="Marcos Camargo | Desenvolvedor Backend Sênior"
         />
         <meta
             property="twitter:description"
-            content="Senior Software Engineer at [BARECODE]"
+            content="Desenvolvedor Backend Sênior com 10+ anos de experiência em Node.js, TypeScript e NestJS. APIs, microsserviços e sistemas de alto volume."
         />
-        <meta property="twitter:image" content="https://mscamargo.dev/me.png" />
+        <meta
+            property="twitter:image"
+            content="https://mscamargo.dev/og-preview.jpg"
+        />
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" sizes="32x32" href="icon.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="icon.png" />
-        <link rel="apple-touch-icon" href="icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+        <link rel="apple-touch-icon" href="icon-192.png" />
 
         <!-- Structured Data -->
         <script type="application/ld+json">
@@ -70,13 +76,17 @@
                 "@context": "https://schema.org",
                 "@type": "Person",
                 "name": "Marcos Camargo",
-                "image": "https://mscamargo.dev/me.png",
-                "jobTitle": "Senior Software Engineer",
-                "worksFor": {
-                    "@type": "Organization",
-                    "name": "BARECODE"
-                },
+                "image": "https://mscamargo.dev/og-preview.jpg",
+                "jobTitle": "Desenvolvedor Backend Sênior",
+                "description": "Desenvolvedor Backend Sênior especializado em Node.js, TypeScript e NestJS.",
+                "email": "mailto:mscamargo.dev@gmail.com",
                 "url": "https://mscamargo.dev",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Pelotas",
+                    "addressRegion": "RS",
+                    "addressCountry": "BR"
+                },
                 "sameAs": [
                     "https://github.com/mscamargo",
                     "https://www.instagram.com/omscamargo.dev",
@@ -91,6 +101,16 @@
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                html {
+                    scroll-behavior: smooth;
+                }
             }
 
             body {
@@ -117,7 +137,8 @@
                 outline-offset: 2px;
             }
 
-            .profile {
+            /* Hero */
+            .hero {
                 display: flex;
                 min-height: 100vh;
                 min-height: 100dvh;
@@ -154,17 +175,38 @@
                 display: block;
             }
 
-            .profile__header--mobile {
-                display: none;
-            }
-
             .profile__title {
                 font-size: 4rem;
                 margin-bottom: 0.5rem;
             }
 
+            .profile__kicker {
+                font-size: 0.95rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1.5pt;
+                color: rgba(255, 255, 255, 0.65);
+                margin-bottom: 0.75rem;
+                display: block;
+            }
+
             .profile__subtitle {
                 font-size: 1.5rem;
+                font-weight: normal;
+            }
+
+            .profile__value-prop {
+                font-size: 1.05rem;
+                font-weight: normal;
+                color: rgba(255, 255, 255, 0.8);
+                max-width: 46ch;
+                line-height: 1.5;
+            }
+
+            .profile__meta {
+                font-size: 0.95rem;
+                font-weight: normal;
+                color: rgba(255, 255, 255, 0.65);
             }
 
             .profile__social {
@@ -208,9 +250,182 @@
                 outline-offset: 4px;
             }
 
+            /* Buttons */
+            .profile__actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 14px 28px;
+                border-radius: 999px;
+                font-weight: 700;
+                font-size: 0.95rem;
+                text-decoration: none;
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+
+            .btn--primary {
+                background-color: #ffffff;
+                color: #121212;
+            }
+
+            .btn--secondary {
+                background-color: transparent;
+                color: #ffffff;
+                border: 1.5px solid rgba(255, 255, 255, 0.5);
+            }
+
+            .btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+                text-decoration: none;
+            }
+
+            .btn:active {
+                transform: scale(1.02);
+            }
+
+            .btn:focus {
+                outline: 2px solid #ffffff;
+                outline-offset: 4px;
+            }
+
+            /* Shared section layout */
+            .section {
+                max-width: 1320px;
+                margin: 0 auto;
+                padding: 80px 20px;
+            }
+
+            .section__title {
+                font-size: 2.25rem;
+                margin-bottom: 24px;
+            }
+
+            .section__text {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: rgba(255, 255, 255, 0.85);
+                max-width: 70ch;
+            }
+
+            .section__footnote {
+                margin-top: 32px;
+                font-size: 0.95rem;
+                color: rgba(255, 255, 255, 0.65);
+            }
+
+            /* Stack chips */
+            .stack__groups {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .stack__group-label {
+                font-size: 0.9rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1pt;
+                color: rgba(255, 255, 255, 0.6);
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            .stack__chips {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                list-style: none;
+            }
+
+            .stack__chip {
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.95rem;
+            }
+
+            /* Timeline */
+            .timeline {
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+                border-left: 2px solid rgba(255, 255, 255, 0.2);
+                padding-left: 28px;
+                list-style: none;
+            }
+
+            .timeline__item {
+                position: relative;
+            }
+
+            .timeline__item::before {
+                content: "";
+                position: absolute;
+                left: -34px;
+                top: 6px;
+                width: 12px;
+                height: 12px;
+                border-radius: 100%;
+                background-color: #ffffff;
+            }
+
+            .timeline__header {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            .timeline__role {
+                font-size: 1.15rem;
+                font-weight: 700;
+            }
+
+            .timeline__date {
+                font-size: 0.9rem;
+                color: rgba(255, 255, 255, 0.6);
+                white-space: nowrap;
+            }
+
+            .timeline__context {
+                font-size: 0.95rem;
+                color: rgba(255, 255, 255, 0.65);
+                margin: 4px 0 10px;
+            }
+
+            .timeline__bullets {
+                list-style: disc;
+                padding-left: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .timeline__bullets li {
+                font-size: 0.95rem;
+                color: rgba(255, 255, 255, 0.85);
+            }
+
+            .footer {
+                text-align: center;
+                padding: 40px 20px 60px;
+                font-size: 0.85rem;
+                color: rgba(255, 255, 255, 0.5);
+            }
+
             /* Tablet Responsive Styles */
             @media (max-width: 1024px) {
-                .profile {
+                .hero {
                     max-width: 100%;
                     padding: 0 20px;
                 }
@@ -226,108 +441,120 @@
                 .profile__row {
                     gap: 40px;
                 }
+
+                .section {
+                    padding: 64px 20px;
+                }
             }
 
             /* Mobile Responsive Styles */
             @media (max-width: 768px) {
-                .profile {
-                    padding: 0;
-                }
-
-                .profile__header--mobile {
-                    display: block;
-                    margin-bottom: 30px;
-                    margin-left: 16px;
-                }
-
-                .profile__header--desktop {
-                    display: none;
+                .hero {
+                    padding: 40px 20px 48px;
+                    min-height: auto;
+                    justify-content: flex-start;
                 }
 
                 .profile__row {
-                    flex-direction: row;
-                    align-items: flex-end;
-                    gap: 0;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 24px;
                 }
 
                 .profile__image {
                     max-width: 60%;
-                    align-self: flex-end;
+                    align-self: center;
                 }
 
                 .profile__content {
-                    flex: 0;
-                    gap: 0;
-                    align-self: flex-end;
-                    padding: 16px;
+                    flex: none;
+                    width: 100%;
+                    gap: 20px;
+                    padding: 0;
                 }
 
                 .profile__social {
-                    flex-direction: column;
-                    align-items: flex-end;
-                    justify-content: flex-end;
+                    flex-direction: row;
+                    flex-wrap: wrap;
                     gap: 16px;
                 }
 
-                .profile {
-                    justify-content: flex-end;
+                .section {
+                    padding: 48px 16px;
+                }
+
+                .section__title {
+                    font-size: 1.75rem;
+                }
+
+                .timeline__header {
+                    flex-direction: column;
+                    gap: 4px;
                 }
             }
 
             /* Accessibility: Reduced Motion */
             @media (prefers-reduced-motion: reduce) {
-                .profile__social-link {
+                .profile__social-link,
+                .btn {
                     transition: none;
                 }
             }
         </style>
     </head>
     <body>
-        <main class="profile">
-            <!-- Mobile header (shown only on mobile) -->
-            <header class="profile__header profile__header--mobile">
-                <h1 class="profile__title">Hey! It's Marcos.</h1>
-                <p class="profile__subtitle">
-                    Senior Software Engineer at
-                    <a href="https://barecode.io" target="_blank" rel="noopener"
-                        >[BARECODE]</a
-                    >
-                </p>
-            </header>
-
+        <section class="hero" id="hero">
             <div class="profile__row">
                 <img
-                    src="./me.png"
-                    alt="Marcos Camargo - Senior Software Engineer"
+                    src="./me.webp"
+                    alt="Marcos Camargo, desenvolvedor backend sênior"
                     class="profile__image"
-                    width="660"
-                    height="1080"
+                    width="1200"
+                    height="1424"
                     fetchpriority="high"
                     loading="eager"
                 />
                 <div class="profile__content">
-                    <header class="profile__header profile__header--desktop">
-                        <h1 class="profile__title">Hey! It's Marcos.</h1>
+                    <header class="profile__header">
+                        <span class="profile__kicker">Desenvolvedor Backend Sênior</span>
+                        <h1 class="profile__title">Oi, eu sou o Marcos.</h1>
                         <p class="profile__subtitle">
-                            Senior Software Engineer at
-                            <a
-                                href="https://barecode.io"
-                                target="_blank"
-                                rel="noopener"
-                                >[BARECODE]</a
-                            >
+                            Construo APIs e sistemas backend confiáveis com
+                            Node.js, TypeScript e NestJS.
                         </p>
                     </header>
+                    <p class="profile__value-prop">
+                        10+ anos em tecnologia, 7+ como desenvolvedor.
+                        Experiência em pagamentos, fintech e sistemas de alto
+                        volume — mas também em SaaS B2B, logística e outros
+                        domínios.
+                    </p>
+                    <p class="profile__meta">Pelotas, RS · Remoto · PJ ou CLT</p>
+                    <div class="profile__actions">
+                        <a
+                            class="btn btn--primary"
+                            href="./cv-marcos-camargo.pdf"
+                            download="cv-marcos-camargo-backend-senior.pdf"
+                            target="_blank"
+                            rel="noopener"
+                            >Baixar currículo (PDF)</a
+                        >
+                        <a
+                            class="btn btn--secondary"
+                            href="mailto:mscamargo.dev@gmail.com"
+                            >Falar comigo</a
+                        >
+                    </div>
                     <nav
                         class="profile__social"
-                        aria-label="Social media links"
+                        aria-label="Redes sociais"
                     >
                         <a
                             class="profile__social-link"
                             href="https://github.com/mscamargo"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="GitHub Profile"
+                            aria-label="Perfil no GitHub"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -348,7 +575,7 @@
                             href="https://www.instagram.com/omscamargo.dev"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Instagram Profile"
+                            aria-label="Perfil no Instagram"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -369,7 +596,7 @@
                             href="https://www.youtube.com/@mscamargo"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="YouTube Channel"
+                            aria-label="Canal no YouTube"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -390,7 +617,7 @@
                             href="https://www.linkedin.com/in/mscamargo/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="LinkedIn Profile"
+                            aria-label="Perfil no LinkedIn"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -406,9 +633,234 @@
                                 />
                             </svg>
                         </a>
+                        <a
+                            class="profile__social-link"
+                            href="mailto:mscamargo.dev@gmail.com"
+                            aria-label="Enviar e-mail"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="100%"
+                                height="100%"
+                                fill="currentColor"
+                                class="profile__social-icon"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"
+                                />
+                            </svg>
+                        </a>
                     </nav>
                 </div>
             </div>
+        </section>
+
+        <main>
+            <section class="section" id="sobre">
+                <h2 class="section__title">Sobre</h2>
+                <p class="section__text">
+                    Desenvolvedor backend sênior, com mais de 10 anos
+                    construindo sistemas confiáveis no ecossistema
+                    Node.js/TypeScript. Projeto e construo APIs REST e
+                    serviços com NestJS e PostgreSQL, escolhendo a arquitetura
+                    que melhor resolve o problema — de monólitos modulares a
+                    microsserviços e sistemas orientados a eventos. Tenho
+                    experiência sólida em modernização de sistemas legados,
+                    otimização de performance e arquitetura limpa/hexagonal
+                    com TDD. Já atuei em plataformas de pagamentos e fintechs
+                    de alto volume, mas também gosto de resolver problemas de
+                    engenharia em SaaS B2B, marketplace e logística.
+                </p>
+            </section>
+
+            <section class="section" id="stack">
+                <h2 class="section__title">Stack</h2>
+                <div class="stack__groups">
+                    <div class="stack__group">
+                        <span class="stack__group-label">Backend</span>
+                        <ul class="stack__chips">
+                            <li class="stack__chip">Node.js</li>
+                            <li class="stack__chip">TypeScript</li>
+                            <li class="stack__chip">NestJS</li>
+                            <li class="stack__chip">REST APIs</li>
+                        </ul>
+                    </div>
+                    <div class="stack__group">
+                        <span class="stack__group-label">Dados</span>
+                        <ul class="stack__chips">
+                            <li class="stack__chip">PostgreSQL</li>
+                            <li class="stack__chip">MySQL</li>
+                            <li class="stack__chip">MongoDB</li>
+                            <li class="stack__chip">Redis</li>
+                        </ul>
+                    </div>
+                    <div class="stack__group">
+                        <span class="stack__group-label"
+                            >Mensageria &amp; Eventos</span
+                        >
+                        <ul class="stack__chips">
+                            <li class="stack__chip">Kafka</li>
+                            <li class="stack__chip">RabbitMQ</li>
+                        </ul>
+                    </div>
+                    <div class="stack__group">
+                        <span class="stack__group-label">Arquitetura</span>
+                        <ul class="stack__chips">
+                            <li class="stack__chip">Clean/Hexagonal</li>
+                            <li class="stack__chip">DDD</li>
+                            <li class="stack__chip">CQRS</li>
+                            <li class="stack__chip">Microsserviços</li>
+                            <li class="stack__chip">TDD</li>
+                        </ul>
+                    </div>
+                    <div class="stack__group">
+                        <span class="stack__group-label">Infra &amp; Cloud</span>
+                        <ul class="stack__chips">
+                            <li class="stack__chip">Docker</li>
+                            <li class="stack__chip">Kubernetes</li>
+                            <li class="stack__chip">AWS</li>
+                            <li class="stack__chip">GCP</li>
+                            <li class="stack__chip">CI/CD</li>
+                        </ul>
+                    </div>
+                    <div class="stack__group">
+                        <span class="stack__group-label">Observabilidade</span>
+                        <ul class="stack__chips">
+                            <li class="stack__chip">Datadog</li>
+                            <li class="stack__chip">Grafana</li>
+                            <li class="stack__chip">Prometheus</li>
+                            <li class="stack__chip">Sentry</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="experiencia">
+                <h2 class="section__title">Destaques de carreira</h2>
+                <ol class="timeline">
+                    <li class="timeline__item">
+                        <div class="timeline__header">
+                            <span class="timeline__role"
+                                >Consultoria Independente — Pagamentos &amp;
+                                Fintech</span
+                            >
+                            <span class="timeline__date">2024–2025</span>
+                        </div>
+                        <p class="timeline__context">
+                            Atuação como consultor de engenharia em projetos
+                            de alta criticidade para clientes distintos.
+                        </p>
+                        <ul class="timeline__bullets">
+                            <li>
+                                Redução de 4x no custo de infraestrutura de
+                                uma plataforma de pagamentos PIX
+                            </li>
+                            <li>
+                                Entrega de gateway de pagamentos global com
+                                carteira multi-moeda e ledger
+                            </li>
+                            <li>
+                                Estabilização de gateway white-label,
+                                escalando para 40+ integrações downstream
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="timeline__item">
+                        <div class="timeline__header">
+                            <span class="timeline__role"
+                                >Woba — Desenvolvedor Backend Sênior</span
+                            >
+                            <span class="timeline__date">2023–2025</span>
+                        </div>
+                        <p class="timeline__context">
+                            Startup B2B. Modernização de monólito legado
+                            (~10 anos, Node.js v0.12).
+                        </p>
+                        <ul class="timeline__bullets">
+                            <li>
+                                Migração dos fluxos core para arquitetura
+                                modular em NestJS
+                            </li>
+                            <li>
+                                Introdução de testes automatizados e cultura
+                                de TDD: cobertura de 0% para ~15% em fluxos
+                                críticos
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="timeline__item">
+                        <div class="timeline__header">
+                            <span class="timeline__role"
+                                >Wiser Educação — Tech Lead / Desenvolvedor
+                                Backend</span
+                            >
+                            <span class="timeline__date">2021–2023</span>
+                        </div>
+                        <p class="timeline__context">
+                            Plataforma de pagamentos interna (~R$3M em
+                            TPV/mês), certificada PCI DSS.
+                        </p>
+                        <ul class="timeline__bullets">
+                            <li>
+                                Redução da taxa de erro de APIs de 10% para 3%
+                            </li>
+                            <li>
+                                Consolidação de ~15 microsserviços em 5
+                                módulos coesos
+                            </li>
+                            <li>
+                                Migração de ~500 mil assinaturas para solução
+                                de pagamentos interna
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="timeline__item">
+                        <div class="timeline__header">
+                            <span class="timeline__role"
+                                >Experiências anteriores</span
+                            >
+                            <span class="timeline__date">2015–2021</span>
+                        </div>
+                        <p class="timeline__context">
+                            Compass.uol, Nave.rs e outras — chatbots
+                            enterprise, aplicações web em produção e MVPs
+                            full stack.
+                        </p>
+                    </li>
+                </ol>
+                <p class="section__footnote">
+                    Esse é um recorte. O histórico completo está no
+                    <a href="./cv-marcos-camargo.pdf" target="_blank" rel="noopener"
+                        >currículo</a
+                    >.
+                </p>
+            </section>
+
+            <section class="section" id="contato">
+                <h2 class="section__title">Vamos conversar?</h2>
+                <p class="section__text">
+                    Aberto a oportunidades remotas como PJ ou CLT no Brasil.
+                </p>
+                <div class="profile__actions" style="margin-top: 24px">
+                    <a
+                        class="btn btn--primary"
+                        href="./cv-marcos-camargo.pdf"
+                        download="cv-marcos-camargo-backend-senior.pdf"
+                        target="_blank"
+                        rel="noopener"
+                        >Baixar currículo (PDF)</a
+                    >
+                    <a
+                        class="btn btn--secondary"
+                        href="mailto:mscamargo.dev@gmail.com"
+                        >Falar comigo</a
+                    >
+                </div>
+            </section>
         </main>
+
+        <footer class="footer">© 2026 Marcos Camargo</footer>
     </body>
 </html>
