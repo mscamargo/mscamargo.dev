@@ -11,7 +11,7 @@
         />
         <meta name="author" content="Marcos Camargo" />
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#05010f" />
+        <meta name="theme-color" content="#05010c" />
         <link rel="canonical" href="https://mscamargo.dev/" />
 
         <meta property="og:type" content="website" />
@@ -36,7 +36,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Chakra+Petch:wght@500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Poppins:wght@700&display=swap"
         />
 
         <script type="application/ld+json">
@@ -58,14 +58,14 @@
 
         <style>
             :root {
-                --fg: #f4f0ff;
+                --ink: #04010a;
+                --pink: #ff2fd0;
                 --cyan: #22e8ff;
-                --magenta: #ff2fd0;
-                --violet: #b14cff;
                 --mint: #6bffb0;
 
-                /* the horizon sits here; the scene layers key off it */
-                --horizon: 58%;
+                /* a lit tube burns white at the core and bleeds color */
+                --core-pink: #ffe9fa;
+                --core-cyan: #e2fbff;
             }
 
             *,
@@ -74,189 +74,110 @@
                 box-sizing: border-box;
             }
 
+            html {
+                background: var(--ink);
+            }
+
             body {
                 margin: 0;
                 min-height: 100svh;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                padding: 40px 20px;
-                background: #05010f;
-                color: var(--fg);
+                gap: clamp(2.25rem, 7vh, 4rem);
+                padding: clamp(2rem, 6vh, 4rem) 22px;
+                background: var(--ink);
+                color: var(--core-cyan);
                 text-align: center;
                 overflow-x: hidden;
                 font-family: "Chakra Petch", system-ui, sans-serif;
                 -webkit-text-size-adjust: 100%;
             }
 
-            /* ---------- retrowave scene ---------- */
-
-            .scene {
+            /* the light the tubes throw into the empty room — the only thing
+               behind the glass, so there is something for it to bend */
+            body::before {
+                content: "";
                 position: fixed;
-                inset: 0;
-                z-index: 0;
-                overflow: hidden;
-                background: linear-gradient(
-                    180deg,
-                    #05010f 0%,
-                    #100430 24%,
-                    #2a0950 42%,
-                    #5c1068 52%,
-                    #a8176f 57.4%,
-                    #180432 58%,
-                    #08021c 100%
-                );
+                inset: -25%;
+                z-index: -1;
+                pointer-events: none;
+                background:
+                    radial-gradient(
+                        44rem 32rem at 50% 34%,
+                        rgba(255, 47, 208, 0.26),
+                        transparent 68%
+                    ),
+                    radial-gradient(
+                        30rem 24rem at 22% 72%,
+                        rgba(177, 76, 255, 0.16),
+                        transparent 70%
+                    ),
+                    radial-gradient(
+                        32rem 22rem at 80% 76%,
+                        rgba(34, 232, 255, 0.16),
+                        transparent 70%
+                    );
+                filter: blur(24px);
             }
 
-            .stars {
-                position: absolute;
-                inset: 0 0 42% 0;
-                -webkit-mask-image: linear-gradient(
-                    180deg,
-                    #000 0%,
-                    transparent 88%
-                );
-                mask-image: linear-gradient(180deg, #000 0%, transparent 88%);
+            /* ---------- the sign ---------- */
+
+            .sign {
+                position: relative;
+                z-index: 1;
+                padding: clamp(1.6rem, 5.5vw, 2.9rem) clamp(1.4rem, 7vw, 4rem);
+                border: 2px solid var(--core-pink);
+                border-radius: 20px;
+                box-shadow:
+                    0 0 4px rgba(255, 233, 250, 0.9),
+                    0 0 14px rgba(255, 47, 208, 0.85),
+                    0 0 40px rgba(255, 47, 208, 0.5),
+                    0 0 90px rgba(255, 47, 208, 0.3),
+                    0 0 160px rgba(255, 47, 208, 0.18),
+                    inset 0 0 4px rgba(255, 233, 250, 0.85),
+                    inset 0 0 18px rgba(255, 47, 208, 0.45),
+                    inset 0 0 50px rgba(255, 47, 208, 0.16);
+                animation: power-on 1.6s steps(1, end) 1 both;
             }
 
-            /* one dot, multiplied by box-shadow */
-            .stars::before {
+            /* the frosted plate the tubes are mounted on */
+            .sign::before {
                 content: "";
                 position: absolute;
-                top: 0;
-                left: 0;
-                width: 2px;
-                height: 2px;
-                border-radius: 50%;
-                background: #fff;
-                box-shadow:
-                    5vw 12vh 0 -0.5px #fff, 14vw 5vh 0 0 rgba(255, 255, 255, 0.7),
-                    23vw 22vh 0 -0.5px #fff, 31vw 9vh 0 0 rgba(255, 255, 255, 0.6),
-                    38vw 27vh 0 -0.5px rgba(255, 255, 255, 0.8),
-                    46vw 4vh 0 0 #fff, 52vw 17vh 0 -0.5px rgba(255, 255, 255, 0.7),
-                    61vw 8vh 0 0 rgba(255, 255, 255, 0.55),
-                    68vw 24vh 0 -0.5px #fff, 74vw 13vh 0 0 rgba(255, 255, 255, 0.75),
-                    81vw 6vh 0 -0.5px rgba(255, 255, 255, 0.6),
-                    88vw 19vh 0 0 #fff, 95vw 11vh 0 -0.5px rgba(255, 255, 255, 0.7),
-                    9vw 30vh 0 0 rgba(255, 255, 255, 0.5),
-                    27vw 34vh 0 -0.5px rgba(255, 255, 255, 0.65),
-                    43vw 37vh 0 0 rgba(255, 255, 255, 0.45),
-                    58vw 32vh 0 -0.5px rgba(255, 255, 255, 0.6),
-                    71vw 39vh 0 0 rgba(255, 255, 255, 0.4),
-                    85vw 35vh 0 -0.5px rgba(255, 255, 255, 0.55),
-                    18vw 16vh 0 0 rgba(255, 255, 255, 0.5),
-                    35vw 14vh 0 -0.5px rgba(255, 255, 255, 0.6),
-                    64vw 2vh 0 0 rgba(255, 255, 255, 0.5),
-                    92vw 29vh 0 -0.5px rgba(255, 255, 255, 0.45);
-            }
-
-            /* the sun: gradient disc, sliced into bands below its midline */
-            .sun {
-                position: absolute;
-                left: 50%;
-                top: var(--horizon);
-                width: min(26rem, 72vw);
-                aspect-ratio: 1;
-                transform: translate(-50%, -72%);
-                border-radius: 50%;
-                opacity: 0.92;
+                inset: 0;
+                z-index: -1;
+                border-radius: inherit;
                 background: linear-gradient(
-                    180deg,
-                    #ffdd8f 0%,
-                    #ff9c46 32%,
-                    #ff4f86 66%,
-                    var(--magenta) 90%,
-                    var(--violet) 100%
+                    155deg,
+                    rgba(255, 255, 255, 0.12),
+                    rgba(255, 255, 255, 0.03) 46%,
+                    rgba(255, 47, 208, 0.08)
                 );
-                /* layers union by default (mask-composite: add) */
-                -webkit-mask-image:
-                    linear-gradient(180deg, #000 0 50%, transparent 50%),
-                    repeating-linear-gradient(
-                        180deg,
-                        #000 0 10px,
-                        transparent 10px 17px
-                    );
-                mask-image:
-                    linear-gradient(180deg, #000 0 50%, transparent 50%),
-                    repeating-linear-gradient(
-                        180deg,
-                        #000 0 10px,
-                        transparent 10px 17px
-                    );
-            }
-
-            .horizon {
-                position: absolute;
-                left: -5%;
-                right: -5%;
-                top: var(--horizon);
-                height: 2px;
-                background: linear-gradient(
-                    90deg,
-                    transparent,
-                    var(--magenta) 22%,
-                    #ffd9f4 50%,
-                    var(--cyan) 78%,
-                    transparent
-                );
+                -webkit-backdrop-filter: blur(26px) saturate(180%);
+                backdrop-filter: blur(26px) saturate(180%);
                 box-shadow:
-                    0 0 18px rgba(255, 47, 208, 0.8),
-                    0 0 48px rgba(34, 232, 255, 0.45);
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                    inset 0 -1px 0 rgba(255, 255, 255, 0.07);
             }
 
-            /* perspective floor grid */
-            .floor {
-                position: absolute;
-                left: -50%;
-                right: -50%;
-                top: var(--horizon);
-                height: 100vh;
-                background-image:
-                    repeating-linear-gradient(
-                        90deg,
-                        rgba(34, 232, 255, 0.7) 0 2px,
-                        transparent 2px 4rem
-                    ),
-                    repeating-linear-gradient(
-                        180deg,
-                        rgba(255, 47, 208, 0.6) 0 2px,
-                        transparent 2px 3rem
-                    );
-                background-position:
-                    0 0,
-                    0 0;
-                transform: perspective(45rem) rotateX(72deg);
-                transform-origin: 50% 0%;
-                -webkit-mask-image: linear-gradient(
-                    180deg,
-                    transparent 0%,
-                    #000 18%,
-                    #000 78%,
-                    transparent 100%
-                );
-                mask-image: linear-gradient(
-                    180deg,
-                    transparent 0%,
-                    #000 18%,
-                    #000 78%,
-                    transparent 100%
-                );
-                animation: floor-run 4s linear infinite;
-            }
-
-            @keyframes floor-run {
-                to {
-                    background-position:
-                        0 0,
-                        0 3rem;
+            @supports not (
+                (backdrop-filter: blur(1px)) or
+                    (-webkit-backdrop-filter: blur(1px))
+            ) {
+                .sign::before {
+                    background: rgba(36, 6, 44, 0.6);
                 }
             }
 
-            /* CRT scanlines, barely there */
-            .scene::after {
+            /* CRT scanlines, kept inside the glass */
+            .sign::after {
                 content: "";
                 position: absolute;
                 inset: 0;
+                z-index: -1;
+                border-radius: inherit;
                 pointer-events: none;
                 background: repeating-linear-gradient(
                     180deg,
@@ -265,106 +186,143 @@
                 );
             }
 
-            /* ---------- glass panel ---------- */
-
-            .panel {
-                position: relative;
-                z-index: 1;
-                width: min(44rem, 100%);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: clamp(1.5rem, 3vh, 2rem);
-                padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem);
-                border-radius: 22px;
-                border: 1px solid rgba(255, 255, 255, 0.18);
-                background: rgba(14, 3, 34, 0.56);
-                -webkit-backdrop-filter: blur(26px) saturate(150%);
-                backdrop-filter: blur(26px) saturate(150%);
-                box-shadow:
-                    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-                    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
-                    0 30px 80px -20px rgba(0, 0, 0, 0.75),
-                    0 0 70px -10px rgba(255, 47, 208, 0.28);
+            h1 {
+                margin: 0;
+                font-family: "Poppins", "Chakra Petch", system-ui, sans-serif;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: clamp(2.15rem, 8.6vw, 4.5rem);
+                line-height: 1.08;
+                letter-spacing: 0.05em;
+                color: transparent;
+                -webkit-text-fill-color: transparent;
+                -webkit-text-stroke: 2px var(--core-pink);
+                filter: drop-shadow(0 0 3px rgba(255, 233, 250, 0.9))
+                    drop-shadow(0 0 10px rgba(255, 47, 208, 0.95))
+                    drop-shadow(0 0 26px rgba(255, 47, 208, 0.6))
+                    drop-shadow(0 0 60px rgba(255, 47, 208, 0.35));
             }
 
-            @supports not (
-                (backdrop-filter: blur(1px)) or
-                    (-webkit-backdrop-filter: blur(1px))
-            ) {
-                .panel {
-                    background: rgba(20, 6, 42, 0.88);
+            /* without text-stroke the letters would vanish — fill them in */
+            @supports not (-webkit-text-stroke: 1px #fff) {
+                h1 {
+                    color: var(--core-pink);
+                    -webkit-text-fill-color: var(--core-pink);
                 }
             }
 
-            h1 {
-                margin: 0;
-                font-family: "Big Shoulders Display", "Chakra Petch", system-ui,
-                    sans-serif;
-                font-weight: 800;
-                font-size: clamp(2.5rem, 9.5vw, 4.75rem);
-                line-height: 0.92;
-                letter-spacing: 0.01em;
-                background: linear-gradient(
-                    180deg,
-                    #ffffff 0%,
-                    #fff0fa 42%,
-                    #ffb0e8 100%
-                );
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-                -webkit-text-fill-color: transparent;
-                filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6))
-                    drop-shadow(0 0 24px rgba(255, 47, 208, 0.5));
-            }
-
-            /* the period stays neon cyan — the one bit of pure neon */
+            /* the full stop is the one cyan tube on the board */
             h1 .dot {
-                color: var(--cyan);
-                -webkit-text-fill-color: var(--cyan);
-                text-shadow:
-                    0 0 6px var(--cyan),
-                    0 0 22px rgba(34, 232, 255, 0.8);
+                -webkit-text-stroke-color: var(--core-cyan);
+                filter: drop-shadow(0 0 4px rgba(226, 251, 255, 0.9))
+                    drop-shadow(0 0 16px rgba(34, 232, 255, 0.85));
             }
 
-            /* ---------- buttons ---------- */
+            @media (min-width: 620px) {
+                h1 {
+                    -webkit-text-stroke-width: 3px;
+                }
+            }
 
-            .btns {
+            /* the tube stutters as it strikes, then holds */
+            @keyframes power-on {
+                0%,
+                12%,
+                26%,
+                44% {
+                    opacity: 0.12;
+                }
+                6%,
+                20%,
+                34%,
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            /* ---------- the button rail ---------- */
+
+            .rail {
+                position: relative;
+                z-index: 1;
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
                 justify-content: center;
-                gap: 14px;
+                gap: clamp(1.6rem, 4.5vw, 2.6rem);
             }
 
             .btn {
-                /* both labels share one grid cell so the width never jumps */
+                /* every label sits in one grid cell so nothing reflows */
+                position: relative;
                 display: grid;
                 grid-template-areas: "l";
                 place-items: center;
-                padding: 11px 22px;
-                border-radius: 12px;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                background: rgba(255, 255, 255, 0.07);
-                color: rgba(244, 240, 255, 0.82);
-                font-family: inherit;
-                font-weight: 500;
-                font-size: 0.95rem;
-                letter-spacing: 0.04em;
+                padding: 11px 26px;
+                border-radius: 999px;
+                border: 1px solid rgba(34, 232, 255, 0.9);
+                /* the paired hairline ring off the arcade rail */
+                outline: 1px solid rgba(34, 232, 255, 0.28);
+                outline-offset: 4px;
+                background: rgba(8, 30, 52, 0.3);
+                -webkit-backdrop-filter: blur(10px) saturate(150%);
+                backdrop-filter: blur(10px) saturate(150%);
+                color: var(--core-cyan);
+                font: inherit;
+                font-weight: 700;
+                font-size: 0.9rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
                 text-decoration: none;
+                white-space: nowrap;
                 cursor: pointer;
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+                box-shadow:
+                    0 0 10px rgba(34, 232, 255, 0.4),
+                    inset 0 0 16px rgba(34, 232, 255, 0.14),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+                text-shadow: 0 0 10px rgba(34, 232, 255, 0.7);
                 transition:
-                    color 0.2s ease,
-                    border-color 0.2s ease,
-                    background-color 0.2s ease,
-                    box-shadow 0.2s ease;
+                    color 0.18s ease,
+                    border-color 0.18s ease,
+                    outline-color 0.18s ease,
+                    background-color 0.18s ease,
+                    box-shadow 0.18s ease,
+                    transform 0.18s ease;
+            }
+
+            /* twin slashes flanking each button */
+            .btn::before,
+            .btn::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 14px;
+                height: 64%;
+                transform: translateY(-50%) skewX(-20deg);
+                background: linear-gradient(
+                    90deg,
+                    rgba(34, 232, 255, 0.95) 0 3px,
+                    transparent 3px 8px,
+                    rgba(34, 232, 255, 0.5) 8px 11px
+                );
+                filter: drop-shadow(0 0 6px rgba(34, 232, 255, 0.7));
+                transition:
+                    opacity 0.18s ease,
+                    filter 0.18s ease;
+            }
+
+            .btn::before {
+                right: calc(100% + 10px);
+                scale: -1 1;
+            }
+
+            .btn::after {
+                left: calc(100% + 10px);
             }
 
             .btn > span {
                 grid-area: l;
-                transition: opacity 0.2s ease;
+                transition: opacity 0.18s ease;
             }
 
             .btn .lbl-hover,
@@ -374,13 +332,22 @@
 
             .btn:hover,
             .btn:focus-visible {
-                outline: none;
-                color: #eafeff;
-                border-color: rgba(34, 232, 255, 0.75);
-                background: rgba(34, 232, 255, 0.13);
+                color: #fff;
+                border-color: #fff;
+                outline-color: rgba(34, 232, 255, 0.7);
+                background: rgba(34, 232, 255, 0.18);
                 box-shadow:
-                    inset 0 1px 0 rgba(255, 255, 255, 0.25),
-                    0 0 20px rgba(34, 232, 255, 0.35);
+                    0 0 24px rgba(34, 232, 255, 0.7),
+                    inset 0 0 24px rgba(34, 232, 255, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+            }
+
+            .btn:hover::before,
+            .btn:hover::after,
+            .btn:focus-visible::before,
+            .btn:focus-visible::after {
+                filter: drop-shadow(0 0 10px rgba(34, 232, 255, 1));
             }
 
             .btn:hover .lbl-idle,
@@ -393,14 +360,110 @@
                 opacity: 1;
             }
 
-            /* copied wins over idle/hover */
-            .btn.copied {
-                color: #eaffee;
-                border-color: rgba(107, 255, 176, 0.75);
-                background: rgba(107, 255, 176, 0.14);
+            /* the marquee button: slanted, magenta, stacked slabs either side */
+            .marquee {
+                border-radius: 6px;
+                padding: 15px 34px;
+                font-size: 1.05rem;
+                letter-spacing: 0.16em;
+                border: 2px solid var(--core-pink);
+                outline: none;
+                color: var(--core-pink);
+                background: linear-gradient(
+                    180deg,
+                    rgba(255, 47, 208, 0.26),
+                    rgba(58, 4, 44, 0.32)
+                );
+                transform: skewX(-14deg);
                 box-shadow:
-                    inset 0 1px 0 rgba(255, 255, 255, 0.25),
-                    0 0 20px rgba(107, 255, 176, 0.35);
+                    0 0 18px rgba(255, 47, 208, 0.6),
+                    0 0 60px rgba(255, 47, 208, 0.25),
+                    inset 0 0 22px rgba(255, 47, 208, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+                text-shadow: 0 0 12px rgba(255, 47, 208, 0.8);
+            }
+
+            .marquee > span {
+                transform: skewX(14deg);
+            }
+
+            .marquee::before,
+            .marquee::after {
+                top: -2px;
+                bottom: -2px;
+                height: auto;
+                width: 16px;
+                transform: none;
+                background: linear-gradient(
+                    90deg,
+                    var(--pink) 0 4px,
+                    transparent 4px 9px,
+                    var(--pink) 9px 14px
+                );
+                filter: drop-shadow(0 0 8px rgba(255, 47, 208, 0.85));
+            }
+
+            .marquee::before {
+                right: calc(100% + 6px);
+                scale: -1 1;
+            }
+
+            .marquee::after {
+                left: calc(100% + 6px);
+            }
+
+            .marquee:hover,
+            .marquee:focus-visible {
+                color: #fff;
+                border-color: #fff;
+                background: linear-gradient(
+                    180deg,
+                    rgba(255, 47, 208, 0.45),
+                    rgba(78, 6, 58, 0.4)
+                );
+                box-shadow:
+                    0 0 30px rgba(255, 47, 208, 0.85),
+                    0 0 90px rgba(255, 47, 208, 0.35),
+                    inset 0 0 30px rgba(255, 47, 208, 0.45),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            }
+
+            .marquee:hover::before,
+            .marquee:hover::after,
+            .marquee:focus-visible::before,
+            .marquee:focus-visible::after {
+                filter: drop-shadow(0 0 12px rgba(255, 47, 208, 1));
+            }
+
+            /* the address keeps its own casing */
+            .lbl-hover.raw {
+                text-transform: none;
+                letter-spacing: 0.03em;
+                font-size: 0.92rem;
+            }
+
+            /* copied outranks idle and hover */
+            .btn.copied,
+            .btn.copied:hover {
+                color: #f2fff7;
+                border-color: var(--mint);
+                background: rgba(107, 255, 176, 0.18);
+                box-shadow:
+                    0 0 26px rgba(107, 255, 176, 0.6),
+                    inset 0 0 24px rgba(107, 255, 176, 0.32),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                text-shadow: 0 0 12px rgba(107, 255, 176, 0.8);
+            }
+
+            .btn.copied::before,
+            .btn.copied::after {
+                background: linear-gradient(
+                    90deg,
+                    var(--mint) 0 4px,
+                    transparent 4px 9px,
+                    var(--mint) 9px 14px
+                );
+                filter: drop-shadow(0 0 9px rgba(107, 255, 176, 0.85));
             }
 
             .btn.copied .lbl-idle,
@@ -424,82 +487,95 @@
                 white-space: nowrap;
             }
 
-            @media (max-width: 480px) {
-                .btns {
+            @media (max-width: 620px) {
+                .rail {
                     flex-direction: column;
                     align-items: stretch;
                     width: 100%;
                     max-width: 20rem;
+                    gap: 15px;
                 }
 
                 .btn {
                     width: 100%;
                 }
+
+                /* the flanking slashes have nowhere to go once stacked */
+                .btn::before,
+                .btn::after {
+                    opacity: 0;
+                }
+
+                .marquee {
+                    order: -1;
+                    transform: none;
+                }
+
+                .marquee > span {
+                    transform: none;
+                }
+
+                .lbl-hover.raw {
+                    font-size: 0.85rem;
+                }
             }
 
             @media (prefers-reduced-motion: reduce) {
-                .floor {
+                .sign {
                     animation: none;
                 }
 
                 .btn,
-                .btn > span {
+                .btn > span,
+                .btn::before,
+                .btn::after {
                     transition: none;
                 }
             }
         </style>
     </head>
     <body>
-        <div class="scene" aria-hidden="true">
-            <div class="stars"></div>
-            <div class="sun"></div>
-            <div class="horizon"></div>
-            <div class="floor"></div>
-        </div>
-
-        <main class="panel">
-            <h1>
-                think twice,<br />code once<span class="dot">.</span>
-            </h1>
-
-            <nav class="btns" aria-label="Profiles and contact">
-                <a
-                    class="btn"
-                    href="https://www.linkedin.com/in/mscamargo/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    <span class="lbl-idle">linkedin</span>
-                    <span class="lbl-hover" aria-hidden="true">@mscamargo</span>
-                </a>
-
-                <a
-                    class="btn"
-                    href="https://github.com/mscamargo"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    <span class="lbl-idle">github</span>
-                    <span class="lbl-hover" aria-hidden="true">@mscamargo</span>
-                </a>
-
-                <button
-                    class="btn"
-                    type="button"
-                    id="email-btn"
-                    data-email="mscamargo.dev@gmail.com"
-                    aria-label="Copy email mscamargo.dev@gmail.com"
-                >
-                    <span class="lbl-idle">email</span>
-                    <span class="lbl-hover" aria-hidden="true"
-                        >mscamargo.dev@gmail.com</span
-                    >
-                    <span class="lbl-copied" aria-hidden="true">copied</span>
-                </button>
-            </nav>
-
-            <p class="sr-status" role="status" aria-live="polite"></p>
+        <main class="sign">
+            <h1>think twice,<br />code once<span class="dot">.</span></h1>
         </main>
+
+        <nav class="rail" aria-label="Profiles and contact">
+            <a
+                class="btn"
+                href="https://www.linkedin.com/in/mscamargo/"
+                target="_blank"
+                rel="noopener"
+            >
+                <span class="lbl-idle">linkedin</span>
+                <span class="lbl-hover" aria-hidden="true">@mscamargo</span>
+            </a>
+
+            <button
+                class="btn marquee"
+                type="button"
+                id="email-btn"
+                data-email="mscamargo.dev@gmail.com"
+                aria-label="Copy email mscamargo.dev@gmail.com"
+            >
+                <span class="lbl-idle">email</span>
+                <span class="lbl-hover raw" aria-hidden="true"
+                    >mscamargo.dev@gmail.com</span
+                >
+                <span class="lbl-copied" aria-hidden="true">copied</span>
+            </button>
+
+            <a
+                class="btn"
+                href="https://github.com/mscamargo"
+                target="_blank"
+                rel="noopener"
+            >
+                <span class="lbl-idle">github</span>
+                <span class="lbl-hover" aria-hidden="true">@mscamargo</span>
+            </a>
+        </nav>
+
+        <p class="sr-status" role="status" aria-live="polite"></p>
 
         <script>
             (function () {
