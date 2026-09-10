@@ -4,8 +4,9 @@ Personal landing page for Marcos Camargo, backend engineer.
 
 ## About
 
-A single page: the tagline **"think twice, code once."** as a cyan neon sign on
-a dark background, with three buttons — linkedin, github, email.
+A single page: the tagline **"think twice, code once."** in a clean display
+typeface on a dark background, with a small cyan neon accent, and three buttons —
+linkedin, github, email.
 
 - One file (`index.html`), no build, no framework
 - Dark theme only
@@ -13,7 +14,7 @@ a dark background, with three buttons — linkedin, github, email.
   full address for email)
 - linkedin / github open in a new tab; **email copies the address to the
   clipboard** (with a `mailto:` fallback) instead of opening a mail client
-- One third-party request: the **Pacifico** display font from Google Fonts
+- One third-party request: the **Space Grotesk** font from Google Fonts
 - A few lines of inline JavaScript, only for the clipboard copy
 
 ## Development
