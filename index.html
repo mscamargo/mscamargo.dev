@@ -11,7 +11,7 @@
         />
         <meta name="author" content="Marcos Camargo" />
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#05030b" />
+        <meta name="theme-color" content="#06060b" />
         <link rel="canonical" href="https://mscamargo.dev/" />
 
         <meta property="og:type" content="website" />
@@ -36,7 +36,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&family=Quicksand:wght@500&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap"
         />
 
         <script type="application/ld+json">
@@ -58,9 +58,9 @@
 
         <style>
             :root {
-                --ink: #05030b;
-                --pink: 255, 64, 190;
-                --cyan: 90, 226, 255;
+                --ink: #06060b;
+                --pink: 255, 60, 190;
+                --cyan: 70, 220, 255;
                 --mint: 120, 255, 190;
             }
 
@@ -78,223 +78,170 @@
                 margin: 0;
                 min-height: 100svh;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: clamp(2.5rem, 8vh, 4rem);
-                padding: clamp(2rem, 8vh, 4rem) 20px;
+                padding: clamp(2rem, 8vh, 5rem) clamp(1.25rem, 6vw, 4rem);
                 background: var(--ink);
-                text-align: center;
-                font-family: "Chakra Petch", system-ui, sans-serif;
+                color: #eef0fa;
+                font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+                    Helvetica, Arial, sans-serif;
                 -webkit-text-size-adjust: 100%;
             }
 
-            /* the little light the tube throws into an otherwise empty room */
+            /* two low, wide neon sources — the only colour on the page */
             body::before {
                 content: "";
                 position: fixed;
                 inset: -20%;
-                z-index: -1;
+                z-index: -2;
                 pointer-events: none;
-                background: radial-gradient(
-                    34rem 26rem at 50% 42%,
-                    rgba(var(--pink), 0.11),
-                    transparent 70%
-                );
+                background:
+                    radial-gradient(
+                        40rem 26rem at 34% 40%,
+                        rgba(var(--pink), 0.2),
+                        transparent 68%
+                    ),
+                    radial-gradient(
+                        36rem 24rem at 70% 62%,
+                        rgba(var(--cyan), 0.15),
+                        transparent 68%
+                    );
             }
 
-            /* ---------- the sign ---------- */
-
-            .sign {
-                position: relative;
-                /* the frame hugs the tube, the way a real sign is bent to fit */
-                width: fit-content;
-                max-width: 100%;
-                padding: clamp(1.4rem, 5vw, 2rem) clamp(1.6rem, 6vw, 2.6rem);
-                border: 1.5px solid rgba(255, 214, 242, 0.92);
-                border-radius: 14px;
-                /* one tight halo, one soft one — a tube is not a floodlight */
-                box-shadow:
-                    0 0 5px rgba(var(--pink), 0.55),
-                    0 0 22px rgba(var(--pink), 0.28),
-                    inset 0 0 12px rgba(var(--pink), 0.14);
-                animation: strike 1.1s steps(1, end) 1 both;
-            }
-
-            /* the frosted plate the tube is mounted on */
-            .sign::before {
+            /* a sheet of glass laid across the middle of the frame; its edges
+               are masked away, so it frosts the light without drawing a box */
+            body::after {
                 content: "";
-                position: absolute;
+                position: fixed;
                 inset: 0;
                 z-index: -1;
-                border-radius: inherit;
-                background: linear-gradient(
-                    158deg,
-                    rgba(255, 255, 255, 0.07),
-                    rgba(255, 255, 255, 0.015) 55%,
-                    rgba(var(--pink), 0.05)
+                pointer-events: none;
+                background: rgba(255, 255, 255, 0.018);
+                -webkit-backdrop-filter: blur(60px) saturate(140%);
+                backdrop-filter: blur(60px) saturate(140%);
+                -webkit-mask-image: linear-gradient(
+                    180deg,
+                    transparent,
+                    #000 26%,
+                    #000 74%,
+                    transparent
                 );
-                -webkit-backdrop-filter: blur(18px) saturate(140%);
-                backdrop-filter: blur(18px) saturate(140%);
-                box-shadow:
-                    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-                    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+                mask-image: linear-gradient(
+                    180deg,
+                    transparent,
+                    #000 26%,
+                    #000 74%,
+                    transparent
+                );
             }
 
-            @supports not (
-                (backdrop-filter: blur(1px)) or
-                    (-webkit-backdrop-filter: blur(1px))
-            ) {
-                .sign::before {
-                    background: rgba(28, 14, 40, 0.55);
-                }
+            .block {
+                width: fit-content;
+                max-width: 100%;
             }
 
-            /* the hardware clamping the tube to the plate */
-            .mount {
-                position: absolute;
-                top: 50%;
-                width: 7px;
-                height: 15px;
-                margin-top: -7.5px;
-                border-radius: 2px;
-                background: #17111f;
-                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
-            }
-
-            .mount.l {
-                left: -3px;
-            }
-
-            .mount.r {
-                right: -3px;
-            }
-
-            /* a monoline face is already a tube — light it, don't outline it */
             h1 {
                 margin: 0;
-                font-family: "Quicksand", system-ui, sans-serif;
-                font-weight: 500;
-                font-size: clamp(1.6rem, 5.6vw, 2.9rem);
-                line-height: 1.3;
-                letter-spacing: 0.015em;
-                color: #fff2fb;
-                text-shadow:
-                    0 0 2px rgba(255, 255, 255, 0.9),
-                    0 0 9px rgba(var(--pink), 0.75),
-                    0 0 24px rgba(var(--pink), 0.4);
+                font-family: "Orbitron", system-ui, sans-serif;
+                font-weight: 800;
+                text-transform: uppercase;
+                font-size: clamp(1.6rem, 7.4vw, 5rem);
+                line-height: 1.14;
+                letter-spacing: -0.01em;
+                /* glass: lit along the top edge, falling to a cool shadow.
+                   sized to one line and repeated, so both lines catch the
+                   same sheen instead of the second one sinking to grey */
+                background: linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #f2f4ff 46%,
+                    #cdd4f0 64%,
+                    #aab3d8 100%
+                );
+                background-size: 100% 50%;
+                background-repeat: repeat-y;
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                -webkit-text-fill-color: transparent;
+                /* the neon reads as a fringe along the edges — a wider halo
+                   just fuses the two lines into a glowing slab */
+                filter: drop-shadow(-1.5px 0 4px rgba(var(--pink), 0.6))
+                    drop-shadow(1.5px 0 4px rgba(var(--cyan), 0.5));
             }
-
-            h1 .dot {
-                color: #eafcff;
-                text-shadow:
-                    0 0 2px rgba(255, 255, 255, 0.9),
-                    0 0 9px rgba(var(--cyan), 0.85),
-                    0 0 22px rgba(var(--cyan), 0.45);
-            }
-
-            /* the tube stutters once as it strikes, then holds */
-            @keyframes strike {
-                0%,
-                18%,
-                42% {
-                    opacity: 0.15;
-                }
-                10%,
-                30%,
-                100% {
-                    opacity: 1;
-                }
-            }
-
-            /* ---------- links ---------- */
 
             .links {
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: clamp(0.9rem, 3vw, 1.4rem);
-                font-size: 0.95rem;
-                letter-spacing: 0.1em;
-            }
-
-            .sep {
-                color: rgba(255, 255, 255, 0.2);
-                font-size: 0.8em;
-                user-select: none;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 1rem;
+                margin-top: clamp(2.5rem, 8vh, 4.5rem);
+                font-size: clamp(0.68rem, 1.5vw, 0.82rem);
+                font-weight: 600;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
             }
 
             .link {
-                position: relative;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                padding: 4px 2px;
+                padding: 0;
                 border: 0;
-                border-bottom: 1px solid transparent;
                 background: none;
-                color: rgba(var(--cyan), 0.82);
+                color: rgba(238, 240, 250, 0.72);
                 font: inherit;
                 letter-spacing: inherit;
+                text-transform: inherit;
                 text-decoration: none;
-                cursor: pointer;
-                text-shadow: 0 0 10px rgba(var(--cyan), 0.35);
-                transition:
-                    color 0.18s ease,
-                    border-color 0.18s ease,
-                    text-shadow 0.18s ease;
-            }
-
-            .link > span {
-                transition: opacity 0.18s ease;
-            }
-
-            /* the swapped-in label floats over the idle one, so the row keeps
-               its natural width instead of padding out to the longer label */
-            .link .lbl-alt {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
                 white-space: nowrap;
+                cursor: pointer;
+                transition:
+                    color 0.2s ease,
+                    text-shadow 0.2s ease;
+            }
+
+            /* the brackets are always in the layout, so nothing shifts when
+               they light up */
+            .link::before,
+            .link::after {
+                color: rgb(var(--cyan));
                 opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+
+            .link::before {
+                content: "[ ";
+            }
+
+            .link::after {
+                content: " ]";
             }
 
             .link:hover,
             .link:focus-visible {
                 outline: none;
-                color: #eafcff;
-                border-bottom-color: rgba(var(--cyan), 0.7);
+                color: #ffffff;
                 text-shadow:
-                    0 0 2px rgba(255, 255, 255, 0.8),
-                    0 0 12px rgba(var(--cyan), 0.8);
+                    0 0 12px rgba(var(--cyan), 0.55),
+                    0 0 28px rgba(var(--cyan), 0.25);
             }
 
-            .link:hover .lbl-idle,
-            .link:focus-visible .lbl-idle {
-                opacity: 0;
-            }
-
-            .link:hover .lbl-alt,
-            .link:focus-visible .lbl-alt {
+            .link:hover::before,
+            .link:hover::after,
+            .link:focus-visible::before,
+            .link:focus-visible::after {
                 opacity: 1;
             }
 
-            /* copied outranks idle and hover */
             .link.copied,
             .link.copied:hover {
                 color: rgb(var(--mint));
-                border-bottom-color: rgba(var(--mint), 0.7);
                 text-shadow:
-                    0 0 2px rgba(255, 255, 255, 0.8),
-                    0 0 12px rgba(var(--mint), 0.8);
+                    0 0 12px rgba(var(--mint), 0.55),
+                    0 0 28px rgba(var(--mint), 0.25);
             }
 
-            .link.copied .lbl-idle {
-                opacity: 0;
-            }
-
-            .link.copied .lbl-alt {
+            .link.copied::before,
+            .link.copied::after {
+                color: rgb(var(--mint));
                 opacity: 1;
             }
 
@@ -310,78 +257,74 @@
                 white-space: nowrap;
             }
 
-            @media (prefers-reduced-motion: reduce) {
-                .sign {
-                    animation: none;
+            /* the row runs out of air before the headline does */
+            @media (max-width: 540px) {
+                .links {
+                    letter-spacing: 0.1em;
                 }
+            }
 
+            @media (prefers-reduced-motion: reduce) {
                 .link,
-                .link > span {
+                .link::before,
+                .link::after {
                     transition: none;
                 }
             }
         </style>
     </head>
     <body>
-        <main class="sign">
-            <span class="mount l" aria-hidden="true"></span>
-            <span class="mount r" aria-hidden="true"></span>
-            <h1>think twice,<br />code once<span class="dot">.</span></h1>
+        <main class="block">
+            <h1>think twice,<br />code once.</h1>
+
+            <nav class="links" aria-label="Profiles and contact">
+                <a
+                    class="link"
+                    href="https://www.linkedin.com/in/mscamargo/"
+                    target="_blank"
+                    rel="noopener"
+                    >linkedin</a
+                >
+
+                <a
+                    class="link"
+                    href="https://github.com/mscamargo"
+                    target="_blank"
+                    rel="noopener"
+                    >github</a
+                >
+
+                <button
+                    class="link"
+                    type="button"
+                    id="email-btn"
+                    data-email="mscamargo.dev@gmail.com"
+                    title="mscamargo.dev@gmail.com"
+                    aria-label="Copy email mscamargo.dev@gmail.com"
+                >
+                    e-mail
+                </button>
+            </nav>
+
+            <p class="sr-status" role="status" aria-live="polite"></p>
         </main>
-
-        <nav class="links" aria-label="Profiles and contact">
-            <a
-                class="link"
-                href="https://www.linkedin.com/in/mscamargo/"
-                target="_blank"
-                rel="noopener"
-            >
-                <span class="lbl-idle">linkedin</span>
-                <span class="lbl-alt" aria-hidden="true">@mscamargo</span>
-            </a>
-
-            <span class="sep" aria-hidden="true">·</span>
-
-            <a
-                class="link"
-                href="https://github.com/mscamargo"
-                target="_blank"
-                rel="noopener"
-            >
-                <span class="lbl-idle">github</span>
-                <span class="lbl-alt" aria-hidden="true">@mscamargo</span>
-            </a>
-
-            <span class="sep" aria-hidden="true">·</span>
-
-            <button
-                class="link"
-                type="button"
-                id="email-btn"
-                data-email="mscamargo.dev@gmail.com"
-                title="mscamargo.dev@gmail.com"
-                aria-label="Copy email mscamargo.dev@gmail.com"
-            >
-                <span class="lbl-idle">email</span>
-                <span class="lbl-alt" aria-hidden="true">copied</span>
-            </button>
-        </nav>
-
-        <p class="sr-status" role="status" aria-live="polite"></p>
 
         <script>
             (function () {
                 var btn = document.getElementById("email-btn");
                 var status = document.querySelector(".sr-status");
                 var email = btn.dataset.email;
+                var label = btn.textContent;
                 var timer;
 
                 function confirmed() {
                     btn.classList.add("copied");
+                    btn.textContent = "copied";
                     status.textContent = "Email copied";
                     clearTimeout(timer);
                     timer = setTimeout(function () {
                         btn.classList.remove("copied");
+                        btn.textContent = label;
                         status.textContent = "";
                     }, 1800);
                 }
