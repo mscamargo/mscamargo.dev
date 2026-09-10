@@ -11,7 +11,7 @@
         />
         <meta name="author" content="Marcos Camargo" />
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#06060b" />
+        <meta name="theme-color" content="#12002b" />
         <link rel="canonical" href="https://mscamargo.dev/" />
 
         <meta property="og:type" content="website" />
@@ -36,7 +36,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap"
         />
 
         <script type="application/ld+json">
@@ -58,10 +58,12 @@
 
         <style>
             :root {
-                --ink: #06060b;
-                --pink: 255, 60, 190;
-                --cyan: 70, 220, 255;
+                --night: #12002b;
+                --pink: 255, 62, 158;
+                --cyan: 60, 232, 255;
                 --mint: 120, 255, 190;
+                /* the horizon sits here; sun, grid and glow all key off it */
+                --horizon: 66%;
             }
 
             *,
@@ -71,92 +73,158 @@
             }
 
             html {
-                background: var(--ink);
+                background: var(--night);
             }
 
             body {
                 margin: 0;
                 min-height: 100svh;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                padding: clamp(2rem, 8vh, 5rem) clamp(1.25rem, 6vw, 4rem);
-                background: var(--ink);
-                color: #eef0fa;
-                font-family: system-ui, -apple-system, "Segoe UI", Roboto,
-                    Helvetica, Arial, sans-serif;
+                justify-content: space-between;
+                padding: clamp(2.5rem, 15vh, 8rem) clamp(1.25rem, 6vw, 4rem)
+                    clamp(2.5rem, 8vh, 5rem);
+                /* no background here: it would paint over .scene, which sits
+                   at a negative z-index in the root stacking context */
+                color: #f4ecff;
+                font-family: "Orbitron", system-ui, -apple-system, "Segoe UI",
+                    Roboto, sans-serif;
+                overflow: hidden;
                 -webkit-text-size-adjust: 100%;
             }
 
-            /* two low, wide neon sources — the only colour on the page */
-            body::before {
-                content: "";
-                position: fixed;
-                inset: -20%;
-                z-index: -2;
-                pointer-events: none;
-                background:
-                    radial-gradient(
-                        40rem 26rem at 34% 40%,
-                        rgba(var(--pink), 0.2),
-                        transparent 68%
-                    ),
-                    radial-gradient(
-                        36rem 24rem at 70% 62%,
-                        rgba(var(--cyan), 0.15),
-                        transparent 68%
-                    );
-            }
+            /* ---------- the scene ---------- */
 
-            /* a sheet of glass laid across the middle of the frame; its edges
-               are masked away, so it frosts the light without drawing a box */
-            body::after {
-                content: "";
+            .scene {
                 position: fixed;
                 inset: 0;
                 z-index: -1;
+                overflow: hidden;
                 pointer-events: none;
-                background: rgba(255, 255, 255, 0.018);
-                -webkit-backdrop-filter: blur(60px) saturate(140%);
-                backdrop-filter: blur(60px) saturate(140%);
-                -webkit-mask-image: linear-gradient(
+                /* dusk: near-black overhead, warming down to the horizon */
+                background:
+                    radial-gradient(
+                        120% 62% at 50% var(--horizon),
+                        rgba(var(--pink), 0.34),
+                        transparent 70%
+                    ),
+                    linear-gradient(180deg, #07000f 0%, #250046 42%, #4b0a5e 62%, #12002b 62%);
+            }
+
+            /* the sun, sliced by bands that widen as they fall */
+            .sun {
+                position: absolute;
+                left: 50%;
+                top: var(--horizon);
+                width: min(64vw, 46vh, 30rem);
+                aspect-ratio: 1;
+                transform: translate(-50%, -76%);
+                border-radius: 50%;
+                background: linear-gradient(
                     180deg,
-                    transparent,
-                    #000 26%,
-                    #000 74%,
-                    transparent
+                    #fff2a8 0%,
+                    #ffd166 22%,
+                    #ff7ac0 62%,
+                    #b14aff 100%
                 );
-                mask-image: linear-gradient(
+                -webkit-mask-image: var(--slices);
+                mask-image: var(--slices);
+                --slices: linear-gradient(
                     180deg,
-                    transparent,
-                    #000 26%,
-                    #000 74%,
-                    transparent
+                    #000 0 54%,
+                    transparent 54% 56%,
+                    #000 56% 65%,
+                    transparent 65% 68%,
+                    #000 68% 76%,
+                    transparent 76% 80%,
+                    #000 80% 87%,
+                    transparent 87% 92%,
+                    #000 92% 100%
+                );
+                filter: drop-shadow(0 0 3rem rgba(var(--pink), 0.55));
+            }
+
+            /* the grid floor, laid flat under the horizon and running away */
+            .grid {
+                position: absolute;
+                left: -60%;
+                right: -60%;
+                top: var(--horizon);
+                bottom: -20%;
+                transform: perspective(18rem) rotateX(76deg);
+                transform-origin: top center;
+                background-image:
+                    repeating-linear-gradient(
+                        90deg,
+                        rgba(var(--cyan), 0.55) 0 2px,
+                        transparent 2px 5rem
+                    ),
+                    repeating-linear-gradient(
+                        0deg,
+                        rgba(var(--cyan), 0.55) 0 2px,
+                        transparent 2px 5rem
+                    );
+                -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%);
+                mask-image: linear-gradient(180deg, transparent, #000 18%);
+                animation: run 2.6s linear infinite;
+            }
+
+            @keyframes run {
+                to {
+                    background-position:
+                        0 5rem,
+                        0 5rem;
+                }
+            }
+
+            /* the hot line where floor meets sky */
+            .horizon {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: var(--horizon);
+                height: 1px;
+                background: rgba(var(--cyan), 0.8);
+                box-shadow:
+                    0 0 1rem rgba(var(--cyan), 0.7),
+                    0 0 4rem rgba(var(--pink), 0.5);
+            }
+
+            /* CRT scanlines over everything */
+            .scene::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: repeating-linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0.22) 0 1px,
+                    transparent 1px 3px
                 );
             }
 
-            .block {
-                width: fit-content;
+            /* ---------- the type ---------- */
+
+            main {
+                position: relative;
+                text-align: center;
                 max-width: 100%;
             }
 
             h1 {
                 margin: 0;
-                font-family: "Orbitron", system-ui, sans-serif;
-                font-weight: 800;
+                font-weight: 900;
                 text-transform: uppercase;
-                font-size: clamp(1.6rem, 7.4vw, 5rem);
-                line-height: 1.14;
+                font-size: clamp(1.9rem, 9.4vw, 5rem);
+                line-height: 1.1;
                 letter-spacing: -0.01em;
-                /* glass: lit along the top edge, falling to a cool shadow.
-                   sized to one line and repeated, so both lines catch the
-                   same sheen instead of the second one sinking to grey */
+                /* chrome: lit along the top, cut by a hard line, cooling out */
                 background: linear-gradient(
                     180deg,
                     #ffffff 0%,
-                    #f2f4ff 46%,
-                    #cdd4f0 64%,
-                    #aab3d8 100%
+                    #cfe9ff 40%,
+                    #ff8fd0 52%,
+                    #ff3e9e 100%
                 );
                 background-size: 100% 50%;
                 background-repeat: repeat-y;
@@ -164,21 +232,20 @@
                 background-clip: text;
                 color: transparent;
                 -webkit-text-fill-color: transparent;
-                /* the neon reads as a fringe along the edges — a wider halo
-                   just fuses the two lines into a glowing slab */
-                filter: drop-shadow(-1.5px 0 4px rgba(var(--pink), 0.6))
-                    drop-shadow(1.5px 0 4px rgba(var(--cyan), 0.5));
+                filter: drop-shadow(0 0 1.2rem rgba(var(--pink), 0.55))
+                    drop-shadow(0 2px 0 rgba(var(--cyan), 0.35));
             }
 
+            /* down on the grid, clear of the sun */
             .links {
+                position: relative;
                 display: flex;
-                justify-content: space-between;
-                align-items: baseline;
-                gap: 1rem;
-                margin-top: clamp(2.5rem, 8vh, 4.5rem);
-                font-size: clamp(0.68rem, 1.5vw, 0.82rem);
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: clamp(1.25rem, 5vw, 3rem);
+                font-size: clamp(0.66rem, 1.5vw, 0.8rem);
                 font-weight: 600;
-                letter-spacing: 0.16em;
+                letter-spacing: 0.22em;
                 text-transform: uppercase;
             }
 
@@ -186,33 +253,17 @@
                 padding: 0;
                 border: 0;
                 background: none;
-                color: rgba(238, 240, 250, 0.72);
+                color: rgba(var(--cyan), 0.85);
                 font: inherit;
                 letter-spacing: inherit;
                 text-transform: inherit;
                 text-decoration: none;
                 white-space: nowrap;
                 cursor: pointer;
+                text-shadow: 0 0 0.75rem rgba(var(--cyan), 0.35);
                 transition:
                     color 0.2s ease,
                     text-shadow 0.2s ease;
-            }
-
-            /* the brackets are always in the layout, so nothing shifts when
-               they light up */
-            .link::before,
-            .link::after {
-                color: rgb(var(--cyan));
-                opacity: 0;
-                transition: opacity 0.2s ease;
-            }
-
-            .link::before {
-                content: "[ ";
-            }
-
-            .link::after {
-                content: " ]";
             }
 
             .link:hover,
@@ -220,29 +271,16 @@
                 outline: none;
                 color: #ffffff;
                 text-shadow:
-                    0 0 12px rgba(var(--cyan), 0.55),
-                    0 0 28px rgba(var(--cyan), 0.25);
-            }
-
-            .link:hover::before,
-            .link:hover::after,
-            .link:focus-visible::before,
-            .link:focus-visible::after {
-                opacity: 1;
+                    0 0 0.75rem rgba(var(--pink), 0.9),
+                    0 0 2rem rgba(var(--pink), 0.5);
             }
 
             .link.copied,
             .link.copied:hover {
                 color: rgb(var(--mint));
                 text-shadow:
-                    0 0 12px rgba(var(--mint), 0.55),
-                    0 0 28px rgba(var(--mint), 0.25);
-            }
-
-            .link.copied::before,
-            .link.copied::after {
-                color: rgb(var(--mint));
-                opacity: 1;
+                    0 0 0.75rem rgba(var(--mint), 0.8),
+                    0 0 2rem rgba(var(--mint), 0.4);
             }
 
             .sr-status {
@@ -257,26 +295,45 @@
                 white-space: nowrap;
             }
 
-            /* the row runs out of air before the headline does */
-            @media (max-width: 540px) {
-                .links {
-                    letter-spacing: 0.1em;
+            /* a laptop in landscape has no room for type, sun and floor at
+               full size — pull all three in rather than let them overlap */
+            @media (max-height: 620px) {
+                body {
+                    padding-top: clamp(1.5rem, 6vh, 3rem);
+                }
+
+                h1 {
+                    font-size: clamp(1.5rem, 6.4vw, 3rem);
+                }
+
+                .sun {
+                    width: min(46vw, 34vh, 18rem);
                 }
             }
 
             @media (prefers-reduced-motion: reduce) {
-                .link,
-                .link::before,
-                .link::after {
+                .grid {
+                    animation: none;
+                }
+
+                .link {
                     transition: none;
                 }
             }
         </style>
     </head>
     <body>
-        <main class="block">
-            <h1>think twice,<br />code once.</h1>
+        <div class="scene" aria-hidden="true">
+            <div class="sun"></div>
+            <div class="grid"></div>
+            <div class="horizon"></div>
+        </div>
 
+        <main>
+            <h1>think twice,<br />code once.</h1>
+        </main>
+
+        <footer>
             <nav class="links" aria-label="Profiles and contact">
                 <a
                     class="link"
@@ -307,7 +364,7 @@
             </nav>
 
             <p class="sr-status" role="status" aria-live="polite"></p>
-        </main>
+        </footer>
 
         <script>
             (function () {

@@ -4,30 +4,30 @@ Personal landing page for Marcos Camargo, backend engineer.
 
 ## About
 
-A single page, no scene and no frame: the tagline **"think twice, code once."**
-set large in wide squarish type, with the three links spread beneath it. The
-neon and the glass are carried by the lettering itself.
+A single page: a synthwave sunset. The tagline **"think twice, code once."**
+in chrome-and-neon type up in the sky, a banded sun sinking into the horizon,
+and a cyan grid running away underneath it.
 
 - One file (`index.html`), no build, no framework
-- Dark theme only
-- The lettering is **Orbitron 800**, uppercase, in a `fit-content` block
-- Glass is a gradient sheen clipped to the text (`background-clip: text`),
-  sized to one line and repeated down, so the second line catches the same
-  light instead of sinking to grey
-- Neon is a chromatic fringe rather than a halo — a pink `drop-shadow()`
-  offset left, a cyan one offset right. A wide halo just fuses the two lines
-  into a glowing slab
-- Behind it: two low radial neon sources and a sheet of frosted glass across
-  the middle band (`backdrop-filter`), its edges masked to nothing so it
-  frosts the light without drawing a box
-- The link row is `space-between` across exactly the headline's width;
-  hover/focus lights it and turns on `[ brackets ]`, which sit in the layout
-  at zero opacity so nothing shifts
+- Dark only — the whole scene is one gradient sky plus three elements
+- **Sun**: a circle with a yellow → magenta → violet gradient, sliced by a
+  `mask-image` whose bands widen as they fall, so it dissolves into the horizon
+- **Grid**: two `repeating-linear-gradient`s on a plane tipped with
+  `perspective() rotateX()`, masked to nothing at the far end and scrolling on
+  a loop (stopped under `prefers-reduced-motion`)
+- **Horizon**: a one-pixel cyan line with a wide pink `box-shadow`
+- CRT scanlines are a `repeating-linear-gradient` over the whole scene
+- The lettering is **Orbitron 900**, uppercase, with a chrome gradient clipped
+  to the text (`background-clip: text`) — sized to one line and repeated down,
+  so both lines catch the same light — over a pink `drop-shadow()` glow
+- The scene sits in a fixed `.scene` at `z-index: -1`; `body` deliberately
+  carries **no background**, which would otherwise paint over it
+- Type at the top, links at the bottom on the grid, so neither fights the sun;
+  a `max-height` query pulls all three in on landscape laptops
 - linkedin / github open in a new tab; **email copies the address to the
   clipboard** (with `execCommand` and `mailto:` fallbacks) instead of opening a
   mail client
-- One third-party request: **Orbitron** from Google Fonts; the links use the
-  system UI font
+- One third-party request: **Orbitron** from Google Fonts
 - A few lines of inline JavaScript, only for the clipboard copy
 
 ## Development
