@@ -11,7 +11,7 @@
         />
         <meta name="author" content="Marcos Camargo" />
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#05010c" />
+        <meta name="theme-color" content="#05030b" />
         <link rel="canonical" href="https://mscamargo.dev/" />
 
         <meta property="og:type" content="website" />
@@ -36,7 +36,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Poppins:wght@700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&family=Quicksand:wght@500&display=swap"
         />
 
         <script type="application/ld+json">
@@ -58,14 +58,10 @@
 
         <style>
             :root {
-                --ink: #04010a;
-                --pink: #ff2fd0;
-                --cyan: #22e8ff;
-                --mint: #6bffb0;
-
-                /* a lit tube burns white at the core and bleeds color */
-                --core-pink: #ffe9fa;
-                --core-cyan: #e2fbff;
+                --ink: #05030b;
+                --pink: 255, 64, 190;
+                --cyan: 90, 226, 255;
+                --mint: 120, 255, 190;
             }
 
             *,
@@ -85,64 +81,47 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: clamp(2.25rem, 7vh, 4rem);
-                padding: clamp(2rem, 6vh, 4rem) 22px;
+                gap: clamp(2.5rem, 8vh, 4rem);
+                padding: clamp(2rem, 8vh, 4rem) 20px;
                 background: var(--ink);
-                color: var(--core-cyan);
                 text-align: center;
-                overflow-x: hidden;
                 font-family: "Chakra Petch", system-ui, sans-serif;
                 -webkit-text-size-adjust: 100%;
             }
 
-            /* the light the tubes throw into the empty room — the only thing
-               behind the glass, so there is something for it to bend */
+            /* the little light the tube throws into an otherwise empty room */
             body::before {
                 content: "";
                 position: fixed;
-                inset: -25%;
+                inset: -20%;
                 z-index: -1;
                 pointer-events: none;
-                background:
-                    radial-gradient(
-                        44rem 32rem at 50% 34%,
-                        rgba(255, 47, 208, 0.26),
-                        transparent 68%
-                    ),
-                    radial-gradient(
-                        30rem 24rem at 22% 72%,
-                        rgba(177, 76, 255, 0.16),
-                        transparent 70%
-                    ),
-                    radial-gradient(
-                        32rem 22rem at 80% 76%,
-                        rgba(34, 232, 255, 0.16),
-                        transparent 70%
-                    );
-                filter: blur(24px);
+                background: radial-gradient(
+                    34rem 26rem at 50% 42%,
+                    rgba(var(--pink), 0.11),
+                    transparent 70%
+                );
             }
 
             /* ---------- the sign ---------- */
 
             .sign {
                 position: relative;
-                z-index: 1;
-                padding: clamp(1.6rem, 5.5vw, 2.9rem) clamp(1.4rem, 7vw, 4rem);
-                border: 2px solid var(--core-pink);
-                border-radius: 20px;
+                /* the frame hugs the tube, the way a real sign is bent to fit */
+                width: fit-content;
+                max-width: 100%;
+                padding: clamp(1.4rem, 5vw, 2rem) clamp(1.6rem, 6vw, 2.6rem);
+                border: 1.5px solid rgba(255, 214, 242, 0.92);
+                border-radius: 14px;
+                /* one tight halo, one soft one — a tube is not a floodlight */
                 box-shadow:
-                    0 0 4px rgba(255, 233, 250, 0.9),
-                    0 0 14px rgba(255, 47, 208, 0.85),
-                    0 0 40px rgba(255, 47, 208, 0.5),
-                    0 0 90px rgba(255, 47, 208, 0.3),
-                    0 0 160px rgba(255, 47, 208, 0.18),
-                    inset 0 0 4px rgba(255, 233, 250, 0.85),
-                    inset 0 0 18px rgba(255, 47, 208, 0.45),
-                    inset 0 0 50px rgba(255, 47, 208, 0.16);
-                animation: power-on 1.6s steps(1, end) 1 both;
+                    0 0 5px rgba(var(--pink), 0.55),
+                    0 0 22px rgba(var(--pink), 0.28),
+                    inset 0 0 12px rgba(var(--pink), 0.14);
+                animation: strike 1.1s steps(1, end) 1 both;
             }
 
-            /* the frosted plate the tubes are mounted on */
+            /* the frosted plate the tube is mounted on */
             .sign::before {
                 content: "";
                 position: absolute;
@@ -150,16 +129,16 @@
                 z-index: -1;
                 border-radius: inherit;
                 background: linear-gradient(
-                    155deg,
-                    rgba(255, 255, 255, 0.12),
-                    rgba(255, 255, 255, 0.03) 46%,
-                    rgba(255, 47, 208, 0.08)
+                    158deg,
+                    rgba(255, 255, 255, 0.07),
+                    rgba(255, 255, 255, 0.015) 55%,
+                    rgba(var(--pink), 0.05)
                 );
-                -webkit-backdrop-filter: blur(26px) saturate(180%);
-                backdrop-filter: blur(26px) saturate(180%);
+                -webkit-backdrop-filter: blur(18px) saturate(140%);
+                backdrop-filter: blur(18px) saturate(140%);
                 box-shadow:
-                    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                    inset 0 -1px 0 rgba(255, 255, 255, 0.07);
+                    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+                    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
             }
 
             @supports not (
@@ -167,311 +146,155 @@
                     (-webkit-backdrop-filter: blur(1px))
             ) {
                 .sign::before {
-                    background: rgba(36, 6, 44, 0.6);
+                    background: rgba(28, 14, 40, 0.55);
                 }
             }
 
-            /* CRT scanlines, kept inside the glass */
-            .sign::after {
-                content: "";
+            /* the hardware clamping the tube to the plate */
+            .mount {
                 position: absolute;
-                inset: 0;
-                z-index: -1;
-                border-radius: inherit;
-                pointer-events: none;
-                background: repeating-linear-gradient(
-                    180deg,
-                    rgba(0, 0, 0, 0.16) 0 1px,
-                    transparent 1px 3px
-                );
+                top: 50%;
+                width: 7px;
+                height: 15px;
+                margin-top: -7.5px;
+                border-radius: 2px;
+                background: #17111f;
+                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
             }
 
+            .mount.l {
+                left: -3px;
+            }
+
+            .mount.r {
+                right: -3px;
+            }
+
+            /* a monoline face is already a tube — light it, don't outline it */
             h1 {
                 margin: 0;
-                font-family: "Poppins", "Chakra Petch", system-ui, sans-serif;
-                font-weight: 700;
-                text-transform: uppercase;
-                font-size: clamp(2.15rem, 8.6vw, 4.5rem);
-                line-height: 1.08;
-                letter-spacing: 0.05em;
-                color: transparent;
-                -webkit-text-fill-color: transparent;
-                -webkit-text-stroke: 2px var(--core-pink);
-                filter: drop-shadow(0 0 3px rgba(255, 233, 250, 0.9))
-                    drop-shadow(0 0 10px rgba(255, 47, 208, 0.95))
-                    drop-shadow(0 0 26px rgba(255, 47, 208, 0.6))
-                    drop-shadow(0 0 60px rgba(255, 47, 208, 0.35));
+                font-family: "Quicksand", system-ui, sans-serif;
+                font-weight: 500;
+                font-size: clamp(1.6rem, 5.6vw, 2.9rem);
+                line-height: 1.3;
+                letter-spacing: 0.015em;
+                color: #fff2fb;
+                text-shadow:
+                    0 0 2px rgba(255, 255, 255, 0.9),
+                    0 0 9px rgba(var(--pink), 0.75),
+                    0 0 24px rgba(var(--pink), 0.4);
             }
 
-            /* without text-stroke the letters would vanish — fill them in */
-            @supports not (-webkit-text-stroke: 1px #fff) {
-                h1 {
-                    color: var(--core-pink);
-                    -webkit-text-fill-color: var(--core-pink);
-                }
-            }
-
-            /* the full stop is the one cyan tube on the board */
             h1 .dot {
-                -webkit-text-stroke-color: var(--core-cyan);
-                filter: drop-shadow(0 0 4px rgba(226, 251, 255, 0.9))
-                    drop-shadow(0 0 16px rgba(34, 232, 255, 0.85));
+                color: #eafcff;
+                text-shadow:
+                    0 0 2px rgba(255, 255, 255, 0.9),
+                    0 0 9px rgba(var(--cyan), 0.85),
+                    0 0 22px rgba(var(--cyan), 0.45);
             }
 
-            @media (min-width: 620px) {
-                h1 {
-                    -webkit-text-stroke-width: 3px;
-                }
-            }
-
-            /* the tube stutters as it strikes, then holds */
-            @keyframes power-on {
+            /* the tube stutters once as it strikes, then holds */
+            @keyframes strike {
                 0%,
-                12%,
-                26%,
-                44% {
-                    opacity: 0.12;
+                18%,
+                42% {
+                    opacity: 0.15;
                 }
-                6%,
-                20%,
-                34%,
+                10%,
+                30%,
                 100% {
                     opacity: 1;
                 }
             }
 
-            /* ---------- the button rail ---------- */
+            /* ---------- links ---------- */
 
-            .rail {
-                position: relative;
-                z-index: 1;
+            .links {
                 display: flex;
-                flex-wrap: wrap;
                 align-items: center;
                 justify-content: center;
-                gap: clamp(1.6rem, 4.5vw, 2.6rem);
+                gap: clamp(0.9rem, 3vw, 1.4rem);
+                font-size: 0.95rem;
+                letter-spacing: 0.1em;
             }
 
-            .btn {
-                /* every label sits in one grid cell so nothing reflows */
+            .sep {
+                color: rgba(255, 255, 255, 0.2);
+                font-size: 0.8em;
+                user-select: none;
+            }
+
+            .link {
                 position: relative;
-                display: grid;
-                grid-template-areas: "l";
-                place-items: center;
-                padding: 11px 26px;
-                border-radius: 999px;
-                border: 1px solid rgba(34, 232, 255, 0.9);
-                /* the paired hairline ring off the arcade rail */
-                outline: 1px solid rgba(34, 232, 255, 0.28);
-                outline-offset: 4px;
-                background: rgba(8, 30, 52, 0.3);
-                -webkit-backdrop-filter: blur(10px) saturate(150%);
-                backdrop-filter: blur(10px) saturate(150%);
-                color: var(--core-cyan);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 4px 2px;
+                border: 0;
+                border-bottom: 1px solid transparent;
+                background: none;
+                color: rgba(var(--cyan), 0.82);
                 font: inherit;
-                font-weight: 700;
-                font-size: 0.9rem;
-                letter-spacing: 0.14em;
-                text-transform: uppercase;
+                letter-spacing: inherit;
                 text-decoration: none;
-                white-space: nowrap;
                 cursor: pointer;
-                box-shadow:
-                    0 0 10px rgba(34, 232, 255, 0.4),
-                    inset 0 0 16px rgba(34, 232, 255, 0.14),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-                text-shadow: 0 0 10px rgba(34, 232, 255, 0.7);
+                text-shadow: 0 0 10px rgba(var(--cyan), 0.35);
                 transition:
                     color 0.18s ease,
                     border-color 0.18s ease,
-                    outline-color 0.18s ease,
-                    background-color 0.18s ease,
-                    box-shadow 0.18s ease,
-                    transform 0.18s ease;
+                    text-shadow 0.18s ease;
             }
 
-            /* twin slashes flanking each button */
-            .btn::before,
-            .btn::after {
-                content: "";
-                position: absolute;
-                top: 50%;
-                width: 14px;
-                height: 64%;
-                transform: translateY(-50%) skewX(-20deg);
-                background: linear-gradient(
-                    90deg,
-                    rgba(34, 232, 255, 0.95) 0 3px,
-                    transparent 3px 8px,
-                    rgba(34, 232, 255, 0.5) 8px 11px
-                );
-                filter: drop-shadow(0 0 6px rgba(34, 232, 255, 0.7));
-                transition:
-                    opacity 0.18s ease,
-                    filter 0.18s ease;
-            }
-
-            .btn::before {
-                right: calc(100% + 10px);
-                scale: -1 1;
-            }
-
-            .btn::after {
-                left: calc(100% + 10px);
-            }
-
-            .btn > span {
-                grid-area: l;
+            .link > span {
                 transition: opacity 0.18s ease;
             }
 
-            .btn .lbl-hover,
-            .btn .lbl-copied {
+            /* the swapped-in label floats over the idle one, so the row keeps
+               its natural width instead of padding out to the longer label */
+            .link .lbl-alt {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                white-space: nowrap;
                 opacity: 0;
             }
 
-            .btn:hover,
-            .btn:focus-visible {
-                color: #fff;
-                border-color: #fff;
-                outline-color: rgba(34, 232, 255, 0.7);
-                background: rgba(34, 232, 255, 0.18);
-                box-shadow:
-                    0 0 24px rgba(34, 232, 255, 0.7),
-                    inset 0 0 24px rgba(34, 232, 255, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-                transform: translateY(-2px);
+            .link:hover,
+            .link:focus-visible {
+                outline: none;
+                color: #eafcff;
+                border-bottom-color: rgba(var(--cyan), 0.7);
+                text-shadow:
+                    0 0 2px rgba(255, 255, 255, 0.8),
+                    0 0 12px rgba(var(--cyan), 0.8);
             }
 
-            .btn:hover::before,
-            .btn:hover::after,
-            .btn:focus-visible::before,
-            .btn:focus-visible::after {
-                filter: drop-shadow(0 0 10px rgba(34, 232, 255, 1));
-            }
-
-            .btn:hover .lbl-idle,
-            .btn:focus-visible .lbl-idle {
+            .link:hover .lbl-idle,
+            .link:focus-visible .lbl-idle {
                 opacity: 0;
             }
 
-            .btn:hover .lbl-hover,
-            .btn:focus-visible .lbl-hover {
+            .link:hover .lbl-alt,
+            .link:focus-visible .lbl-alt {
                 opacity: 1;
             }
 
-            /* the marquee button: slanted, magenta, stacked slabs either side */
-            .marquee {
-                border-radius: 6px;
-                padding: 15px 34px;
-                font-size: 1.05rem;
-                letter-spacing: 0.16em;
-                border: 2px solid var(--core-pink);
-                outline: none;
-                color: var(--core-pink);
-                background: linear-gradient(
-                    180deg,
-                    rgba(255, 47, 208, 0.26),
-                    rgba(58, 4, 44, 0.32)
-                );
-                transform: skewX(-14deg);
-                box-shadow:
-                    0 0 18px rgba(255, 47, 208, 0.6),
-                    0 0 60px rgba(255, 47, 208, 0.25),
-                    inset 0 0 22px rgba(255, 47, 208, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-                text-shadow: 0 0 12px rgba(255, 47, 208, 0.8);
-            }
-
-            .marquee > span {
-                transform: skewX(14deg);
-            }
-
-            .marquee::before,
-            .marquee::after {
-                top: -2px;
-                bottom: -2px;
-                height: auto;
-                width: 16px;
-                transform: none;
-                background: linear-gradient(
-                    90deg,
-                    var(--pink) 0 4px,
-                    transparent 4px 9px,
-                    var(--pink) 9px 14px
-                );
-                filter: drop-shadow(0 0 8px rgba(255, 47, 208, 0.85));
-            }
-
-            .marquee::before {
-                right: calc(100% + 6px);
-                scale: -1 1;
-            }
-
-            .marquee::after {
-                left: calc(100% + 6px);
-            }
-
-            .marquee:hover,
-            .marquee:focus-visible {
-                color: #fff;
-                border-color: #fff;
-                background: linear-gradient(
-                    180deg,
-                    rgba(255, 47, 208, 0.45),
-                    rgba(78, 6, 58, 0.4)
-                );
-                box-shadow:
-                    0 0 30px rgba(255, 47, 208, 0.85),
-                    0 0 90px rgba(255, 47, 208, 0.35),
-                    inset 0 0 30px rgba(255, 47, 208, 0.45),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-            }
-
-            .marquee:hover::before,
-            .marquee:hover::after,
-            .marquee:focus-visible::before,
-            .marquee:focus-visible::after {
-                filter: drop-shadow(0 0 12px rgba(255, 47, 208, 1));
-            }
-
-            /* the address keeps its own casing */
-            .lbl-hover.raw {
-                text-transform: none;
-                letter-spacing: 0.03em;
-                font-size: 0.92rem;
-            }
-
             /* copied outranks idle and hover */
-            .btn.copied,
-            .btn.copied:hover {
-                color: #f2fff7;
-                border-color: var(--mint);
-                background: rgba(107, 255, 176, 0.18);
-                box-shadow:
-                    0 0 26px rgba(107, 255, 176, 0.6),
-                    inset 0 0 24px rgba(107, 255, 176, 0.32),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-                text-shadow: 0 0 12px rgba(107, 255, 176, 0.8);
+            .link.copied,
+            .link.copied:hover {
+                color: rgb(var(--mint));
+                border-bottom-color: rgba(var(--mint), 0.7);
+                text-shadow:
+                    0 0 2px rgba(255, 255, 255, 0.8),
+                    0 0 12px rgba(var(--mint), 0.8);
             }
 
-            .btn.copied::before,
-            .btn.copied::after {
-                background: linear-gradient(
-                    90deg,
-                    var(--mint) 0 4px,
-                    transparent 4px 9px,
-                    var(--mint) 9px 14px
-                );
-                filter: drop-shadow(0 0 9px rgba(107, 255, 176, 0.85));
-            }
-
-            .btn.copied .lbl-idle,
-            .btn.copied .lbl-hover {
+            .link.copied .lbl-idle {
                 opacity: 0;
             }
 
-            .btn.copied .lbl-copied {
+            .link.copied .lbl-alt {
                 opacity: 1;
             }
 
@@ -487,48 +310,13 @@
                 white-space: nowrap;
             }
 
-            @media (max-width: 620px) {
-                .rail {
-                    flex-direction: column;
-                    align-items: stretch;
-                    width: 100%;
-                    max-width: 20rem;
-                    gap: 15px;
-                }
-
-                .btn {
-                    width: 100%;
-                }
-
-                /* the flanking slashes have nowhere to go once stacked */
-                .btn::before,
-                .btn::after {
-                    opacity: 0;
-                }
-
-                .marquee {
-                    order: -1;
-                    transform: none;
-                }
-
-                .marquee > span {
-                    transform: none;
-                }
-
-                .lbl-hover.raw {
-                    font-size: 0.85rem;
-                }
-            }
-
             @media (prefers-reduced-motion: reduce) {
                 .sign {
                     animation: none;
                 }
 
-                .btn,
-                .btn > span,
-                .btn::before,
-                .btn::after {
+                .link,
+                .link > span {
                     transition: none;
                 }
             }
@@ -536,43 +324,47 @@
     </head>
     <body>
         <main class="sign">
+            <span class="mount l" aria-hidden="true"></span>
+            <span class="mount r" aria-hidden="true"></span>
             <h1>think twice,<br />code once<span class="dot">.</span></h1>
         </main>
 
-        <nav class="rail" aria-label="Profiles and contact">
+        <nav class="links" aria-label="Profiles and contact">
             <a
-                class="btn"
+                class="link"
                 href="https://www.linkedin.com/in/mscamargo/"
                 target="_blank"
                 rel="noopener"
             >
                 <span class="lbl-idle">linkedin</span>
-                <span class="lbl-hover" aria-hidden="true">@mscamargo</span>
+                <span class="lbl-alt" aria-hidden="true">@mscamargo</span>
             </a>
 
-            <button
-                class="btn marquee"
-                type="button"
-                id="email-btn"
-                data-email="mscamargo.dev@gmail.com"
-                aria-label="Copy email mscamargo.dev@gmail.com"
-            >
-                <span class="lbl-idle">email</span>
-                <span class="lbl-hover raw" aria-hidden="true"
-                    >mscamargo.dev@gmail.com</span
-                >
-                <span class="lbl-copied" aria-hidden="true">copied</span>
-            </button>
+            <span class="sep" aria-hidden="true">·</span>
 
             <a
-                class="btn"
+                class="link"
                 href="https://github.com/mscamargo"
                 target="_blank"
                 rel="noopener"
             >
                 <span class="lbl-idle">github</span>
-                <span class="lbl-hover" aria-hidden="true">@mscamargo</span>
+                <span class="lbl-alt" aria-hidden="true">@mscamargo</span>
             </a>
+
+            <span class="sep" aria-hidden="true">·</span>
+
+            <button
+                class="link"
+                type="button"
+                id="email-btn"
+                data-email="mscamargo.dev@gmail.com"
+                title="mscamargo.dev@gmail.com"
+                aria-label="Copy email mscamargo.dev@gmail.com"
+            >
+                <span class="lbl-idle">email</span>
+                <span class="lbl-alt" aria-hidden="true">copied</span>
+            </button>
         </nav>
 
         <p class="sr-status" role="status" aria-live="polite"></p>
