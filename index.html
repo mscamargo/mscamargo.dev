@@ -1,93 +1,56 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Marcos Camargo — Desenvolvedor Backend Sênior</title>
+        <title>Marcos Camargo</title>
 
         <meta
             name="description"
-            content="Desenvolvedor backend sênior, 10 anos desenvolvendo software e foco em backend no ecossistema Node.js/TypeScript desde 2019. APIs REST e serviços com NestJS e PostgreSQL."
+            content="Marcos Camargo — backend engineer. think twice, code once."
         />
         <meta name="author" content="Marcos Camargo" />
-        <meta name="color-scheme" content="light dark" />
-        <meta
-            name="theme-color"
-            content="#ffffff"
-            media="(prefers-color-scheme: light)"
-        />
-        <meta
-            name="theme-color"
-            content="#121212"
-            media="(prefers-color-scheme: dark)"
-        />
+        <meta name="color-scheme" content="dark" />
+        <meta name="theme-color" content="#08080c" />
         <link rel="canonical" href="https://mscamargo.dev/" />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://mscamargo.dev/" />
-        <meta property="og:locale" content="pt_BR" />
-        <meta
-            property="og:title"
-            content="Marcos Camargo — Desenvolvedor Backend Sênior"
-        />
+        <meta property="og:title" content="Marcos Camargo" />
         <meta
             property="og:description"
-            content="Desenvolvedor backend sênior, 10 anos desenvolvendo software e foco em backend no ecossistema Node.js/TypeScript desde 2019. APIs REST e serviços com NestJS e PostgreSQL."
+            content="Marcos Camargo — backend engineer. think twice, code once."
         />
-        <meta
-            property="og:image"
-            content="https://mscamargo.dev/og-preview.jpg"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-            name="twitter:title"
-            content="Marcos Camargo — Desenvolvedor Backend Sênior"
-        />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Marcos Camargo" />
         <meta
             name="twitter:description"
-            content="Desenvolvedor backend sênior, 10 anos desenvolvendo software e foco em backend no ecossistema Node.js/TypeScript desde 2019."
-        />
-        <meta
-            name="twitter:image"
-            content="https://mscamargo.dev/og-preview.jpg"
+            content="Marcos Camargo — backend engineer. think twice, code once."
         />
 
         <link rel="icon" type="image/png" sizes="32x32" href="icon.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
         <link rel="apple-touch-icon" href="icon-192.png" />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+        />
+
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
                 "@type": "Person",
                 "name": "Marcos Camargo",
-                "image": "https://mscamargo.dev/og-preview.jpg",
-                "jobTitle": "Desenvolvedor Backend Sênior",
-                "description": "Desenvolvedor backend sênior especializado em Node.js, TypeScript e NestJS.",
-                "email": "mailto:mscamargo.dev@gmail.com",
                 "url": "https://mscamargo.dev",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Pelotas",
-                    "addressRegion": "RS",
-                    "addressCountry": "BR"
-                },
-                "alumniOf": {
-                    "@type": "CollegeOrUniversity",
-                    "name": "UniSenac RS"
-                },
-                "knowsAbout": [
-                    "Node.js",
-                    "TypeScript",
-                    "NestJS",
-                    "PostgreSQL",
-                    "Microsserviços",
-                    "Event-Driven Architecture",
-                    "Clean Architecture",
-                    "Domain-Driven Design",
-                    "Kubernetes",
-                    "Pagamentos e fintech"
-                ],
+                "jobTitle": "Backend Engineer",
+                "email": "mailto:mscamargo.dev@gmail.com",
                 "sameAs": [
                     "https://github.com/mscamargo",
                     "https://www.linkedin.com/in/mscamargo/",
@@ -99,22 +62,16 @@
 
         <style>
             :root {
-                --bg: #ffffff;
-                --fg: #1a1a1a;
-                --muted: #5a5a5a;
-                --rule: #dcdcdc;
-                --accent: #0f6f9e;
-                --measure: 42rem;
-            }
+                --bg: #08080c;
+                --fg: #e8e8e8;
+                --muted: #8a8a99;
 
-            @media (prefers-color-scheme: dark) {
-                :root {
-                    --bg: #121212;
-                    --fg: #e8e8e8;
-                    --muted: #a0a0a0;
-                    --rule: #2c2c2c;
-                    --accent: #1793d1;
-                }
+                /* neon cyan: near-white core, cyan tube, wide glow */
+                --core: #eafdff;
+                --tube: #2de2ff;
+                --glow: #0bd7ff;
+                --tube-dim: rgba(45, 226, 255, 0.4);
+                --ok: #6bffb0;
             }
 
             *,
@@ -125,8 +82,16 @@
 
             body {
                 margin: 0;
+                min-height: 100svh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 48px 20px;
                 background: var(--bg);
                 color: var(--fg);
+                text-align: center;
+                overflow-x: hidden;
                 font-family:
                     system-ui,
                     -apple-system,
@@ -135,680 +100,251 @@
                     "Helvetica Neue",
                     Arial,
                     sans-serif;
-                font-size: 17px;
-                line-height: 1.6;
                 -webkit-text-size-adjust: 100%;
             }
 
-            .page {
-                max-width: var(--measure);
-                margin: 0 auto;
-                padding: 56px 20px 64px;
+            /* soft radial vignette behind the content, static */
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                background: radial-gradient(
+                    60% 50% at 50% 42%,
+                    rgba(11, 215, 255, 0.08),
+                    transparent 70%
+                );
             }
 
-            a {
-                color: var(--accent);
-                text-decoration: underline;
-                text-underline-offset: 2px;
-            }
-
-            a:focus-visible {
-                outline: 2px solid var(--accent);
-                outline-offset: 2px;
-            }
-
-            /* Cabeçalho */
-            .masthead {
+            main {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                gap: 20px;
+                gap: clamp(2.25rem, 7vh, 3.75rem);
             }
 
-            .avatar {
-                flex: none;
-                width: 96px;
-                height: 96px;
-                border-radius: 50%;
-                overflow: hidden;
-                background: var(--rule);
-            }
-
-            /* me.webp é corpo inteiro: recorta e amplia só o rosto */
-            .avatar img {
-                display: block;
-                width: 240px;
-                height: auto;
-                margin: -4px 0 0 -60px;
-            }
-
+            /* Neon sign */
             h1 {
-                font-size: 1.75rem;
-                line-height: 1.2;
-                letter-spacing: -0.01em;
                 margin: 0;
+                font-family: "Pacifico", cursive;
+                font-weight: 400;
+                font-size: clamp(2rem, 8vw, 4.5rem);
+                line-height: 1.15;
+                color: var(--core);
+                text-shadow:
+                    0 0 2px var(--core),
+                    0 0 6px var(--tube),
+                    0 0 12px var(--tube),
+                    0 0 24px var(--glow),
+                    0 0 48px var(--glow),
+                    0 0 80px var(--glow);
             }
 
-            .role {
-                margin: 2px 0 0;
-            }
-
-            .meta {
-                margin: 2px 0 0;
-                color: var(--muted);
-                font-size: 0.9375rem;
-            }
-
-            .links {
-                margin-top: 24px;
+            /* Buttons */
+            .btns {
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
-                gap: 10px 18px;
-                font-size: 0.9375rem;
+                justify-content: center;
+                gap: 14px 18px;
             }
 
             .btn {
-                border: 1px solid currentColor;
-                padding: 6px 14px;
-                text-decoration: none;
-                font-weight: 600;
-            }
-
-            .btn:hover {
-                text-decoration: underline;
-            }
-
-            /* Seções */
-            section {
-                margin-top: 48px;
-            }
-
-            h2 {
-                font-size: 0.8125rem;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-                color: var(--muted);
-                border-bottom: 1px solid var(--rule);
-                padding-bottom: 6px;
-                margin: 0 0 20px;
-            }
-
-            p {
-                margin: 0 0 16px;
-            }
-
-            p:last-child {
-                margin-bottom: 0;
-            }
-
-            /* Stack e formação */
-            .specs {
+                /* both labels share one grid cell so width never jumps */
                 display: grid;
-                grid-template-columns: 11rem 1fr;
-                gap: 10px 20px;
-                margin: 0;
+                grid-template-areas: "l";
+                place-items: center;
+                padding: 10px 22px;
+                border: 1px solid var(--tube-dim);
+                border-radius: 10px;
+                background: transparent;
+                color: var(--tube-dim);
+                font: inherit;
+                font-size: 0.95rem;
+                letter-spacing: 0.02em;
+                text-decoration: none;
+                cursor: pointer;
+                transition:
+                    color 0.18s ease,
+                    border-color 0.18s ease,
+                    box-shadow 0.18s ease;
             }
 
-            .specs dt {
-                color: var(--muted);
-                font-size: 0.875rem;
-                line-height: 1.5;
-                padding-top: 3px;
+            .btn > span {
+                grid-area: l;
+                transition: opacity 0.18s ease;
             }
 
-            .specs dd {
-                margin: 0;
+            .btn .lbl-hover,
+            .btn .lbl-copied {
+                opacity: 0;
             }
 
-            /* Experiência */
-            .job {
-                margin-bottom: 32px;
+            .btn:hover,
+            .btn:focus-visible {
+                outline: none;
+                color: var(--tube);
+                border-color: var(--tube);
+                box-shadow:
+                    0 0 6px var(--glow),
+                    0 0 18px var(--glow),
+                    inset 0 0 8px rgba(11, 215, 255, 0.25);
+                text-shadow: 0 0 8px var(--glow);
             }
 
-            .job:last-child {
-                margin-bottom: 0;
+            .btn:hover .lbl-idle,
+            .btn:focus-visible .lbl-idle {
+                opacity: 0;
             }
 
-            .job h3 {
-                font-size: 1rem;
-                margin: 0;
+            .btn:hover .lbl-hover,
+            .btn:focus-visible .lbl-hover {
+                opacity: 1;
             }
 
-            .job .when {
-                margin: 2px 0 8px;
-                color: var(--muted);
-                font-size: 0.875rem;
+            /* copied state wins over idle/hover */
+            .btn.copied {
+                color: var(--ok);
+                border-color: var(--ok);
+                box-shadow:
+                    0 0 6px rgba(107, 255, 176, 0.7),
+                    0 0 18px rgba(107, 255, 176, 0.5);
+                text-shadow: 0 0 8px rgba(107, 255, 176, 0.7);
             }
 
-            .job .ctx {
-                margin: 0 0 8px;
-                color: var(--muted);
+            .btn.copied .lbl-idle,
+            .btn.copied .lbl-hover {
+                opacity: 0;
             }
 
-            .job ul {
-                margin: 0;
-                padding-left: 1.15em;
+            .btn.copied .lbl-copied {
+                opacity: 1;
             }
 
-            .job li {
-                margin-bottom: 4px;
+            .sr-status {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                margin: -1px;
+                padding: 0;
+                border: 0;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                white-space: nowrap;
             }
 
-            .tech {
-                margin: 10px 0 0;
-                color: var(--muted);
-                font-size: 0.875rem;
-            }
-
-            footer {
-                margin-top: 56px;
-                padding-top: 16px;
-                border-top: 1px solid var(--rule);
-                color: var(--muted);
-                font-size: 0.875rem;
-            }
-
-            @media (max-width: 640px) {
-                body {
-                    font-size: 16px;
-                }
-
-                .page {
-                    padding: 32px 18px 48px;
-                }
-
-                .masthead {
+            @media (max-width: 480px) {
+                .btns {
                     flex-direction: column;
-                    align-items: flex-start;
-                    gap: 14px;
+                    align-items: stretch;
+                    width: 100%;
+                    max-width: 20rem;
                 }
 
-                .specs {
-                    grid-template-columns: 1fr;
-                    gap: 0;
-                }
-
-                .specs dd {
-                    margin-bottom: 14px;
+                .btn {
+                    width: 100%;
                 }
             }
 
-            @media print {
-                :root {
-                    --bg: #ffffff;
-                    --fg: #000000;
-                    --muted: #333333;
-                    --rule: #999999;
-                    --accent: #000000;
-                }
-
-                body {
-                    font-size: 10pt;
-                    line-height: 1.4;
-                }
-
-                .page {
-                    max-width: none;
-                    padding: 0;
-                }
-
-                .avatar,
-                nav.links .btn,
-                footer {
-                    display: none;
-                }
-
-                /* na folha os perfis valem como texto + URL, o download não */
-                .btn {
-                    border: 0;
-                    padding: 0;
-                    font-weight: 400;
-                }
-
-                section {
-                    margin-top: 18px;
-                }
-
-                .job {
-                    margin-bottom: 12px;
-                    break-inside: avoid;
-                }
-
-                a {
-                    text-decoration: none;
-                }
-
-                a[href^="http"]::after {
-                    content: " (" attr(href) ")";
-                    font-size: 8pt;
-                    color: #444;
+            @media (prefers-reduced-motion: reduce) {
+                .btn,
+                .btn > span {
+                    transition: none;
                 }
             }
         </style>
     </head>
     <body>
-        <div class="page">
-            <header class="masthead">
-                <div class="avatar">
-                    <img
-                        src="./me.webp"
-                        alt="Marcos Camargo"
-                        width="240"
-                        height="285"
-                        fetchpriority="high"
-                    />
-                </div>
-                <div>
-                    <h1>Marcos Camargo</h1>
-                    <p class="role">Desenvolvedor Backend Sênior</p>
-                    <p class="meta">Pelotas, RS · Remoto · PJ ou CLT</p>
-                </div>
-            </header>
+        <main>
+            <h1>think twice, code once.</h1>
 
-            <nav class="links" aria-label="Currículo e perfis">
+            <nav class="btns" aria-label="Profiles and contact">
                 <a
                     class="btn"
-                    href="./cv-marcos-camargo.pdf"
-                    download="cv-marcos-camargo-backend-senior.pdf"
-                    >Currículo (PDF)</a
-                >
-                <a href="mailto:mscamargo.dev@gmail.com">e-mail</a>
-                <a href="https://github.com/mscamargo" rel="noopener">github</a>
-                <a href="https://www.linkedin.com/in/mscamargo/" rel="noopener"
-                    >linkedin</a
-                >
-                <a href="https://www.youtube.com/@mscamargo" rel="noopener"
-                    >youtube</a
-                >
-                <a
-                    href="https://www.instagram.com/omscamargo.dev"
+                    href="https://www.linkedin.com/in/mscamargo/"
+                    target="_blank"
                     rel="noopener"
-                    >instagram</a
                 >
+                    <span class="lbl-idle">linkedin</span>
+                    <span class="lbl-hover" aria-hidden="true">@mscamargo</span>
+                </a>
+
+                <a
+                    class="btn"
+                    href="https://github.com/mscamargo"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    <span class="lbl-idle">github</span>
+                    <span class="lbl-hover" aria-hidden="true">@mscamargo</span>
+                </a>
+
+                <button
+                    class="btn"
+                    type="button"
+                    id="email-btn"
+                    data-email="mscamargo.dev@gmail.com"
+                    aria-label="Copy email mscamargo.dev@gmail.com"
+                >
+                    <span class="lbl-idle">email</span>
+                    <span class="lbl-hover" aria-hidden="true"
+                        >mscamargo.dev@gmail.com</span
+                    >
+                    <span class="lbl-copied" aria-hidden="true">copied</span>
+                </button>
             </nav>
 
-            <main>
-                <section id="sobre">
-                    <h2>Sobre</h2>
-                    <p>
-                        Desenvolvedor backend sênior, 10 anos desenvolvendo
-                        software, com foco em backend no ecossistema
-                        Node.js/TypeScript desde 2019. Projeto e construo APIs
-                        REST e serviços backend com NestJS e PostgreSQL,
-                        escolhendo a arquitetura conforme o problema — de
-                        monólitos modulares a microsserviços orientados a
-                        eventos (RabbitMQ, Kafka, Redis).
-                    </p>
-                    <p>
-                        Experiência forte em modernização de legado, migração
-                        incremental (strangler fig), otimização de performance
-                        de banco e infraestrutura, e arquitetura
-                        limpa/hexagonal com DDD, CQRS e TDD. Domínio de
-                        pagamentos e fintech: gateways, adquirência, PCI DSS,
-                        conciliação e ledger — sempre colado ao desafio de
-                        engenharia por trás, que é alto volume, consistência
-                        transacional e conformidade.
-                    </p>
-                </section>
+            <p class="sr-status" role="status" aria-live="polite"></p>
+        </main>
 
-                <section id="stack">
-                    <h2>Stack</h2>
-                    <dl class="specs">
-                        <dt>Backend</dt>
-                        <dd>
-                            Node.js · TypeScript · NestJS · Express.js · REST
-                            APIs · Python · Kotlin/Spring · PHP/Laravel
-                        </dd>
+        <script>
+            (function () {
+                var btn = document.getElementById("email-btn");
+                var status = document.querySelector(".sr-status");
+                var email = btn.dataset.email;
+                var timer;
 
-                        <dt>Bancos de dados</dt>
-                        <dd>PostgreSQL · SQL · MySQL · MongoDB · Redis</dd>
+                function confirmed() {
+                    btn.classList.add("copied");
+                    status.textContent = "Email copied";
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        btn.classList.remove("copied");
+                        status.textContent = "";
+                    }, 1800);
+                }
 
-                        <dt>Mensageria &amp; eventos</dt>
-                        <dd>
-                            RabbitMQ · Apache Kafka · Event-Driven Architecture
-                        </dd>
+                function legacyCopy() {
+                    var input = document.createElement("input");
+                    input.value = email;
+                    input.setAttribute("readonly", "");
+                    input.style.position = "fixed";
+                    input.style.opacity = "0";
+                    document.body.appendChild(input);
+                    input.select();
+                    var ok = false;
+                    try {
+                        ok = document.execCommand("copy");
+                    } catch (e) {
+                        ok = false;
+                    }
+                    document.body.removeChild(input);
+                    return ok;
+                }
 
-                        <dt>Arquitetura &amp; padrões</dt>
-                        <dd>
-                            Microsserviços · Monólito Modular · Clean
-                            Architecture · Hexagonal (Ports &amp; Adapters) ·
-                            DDD · CQRS · SOLID · System Design
-                        </dd>
-
-                        <dt>Infra &amp; DevOps</dt>
-                        <dd>
-                            Docker · Kubernetes · AWS (EC2, S3, RDS) · CI/CD ·
-                            GitHub Actions
-                        </dd>
-
-                        <dt>Observabilidade</dt>
-                        <dd>
-                            Elastic APM · Datadog · Grafana · Prometheus ·
-                            Sentry · OpenTelemetry
-                        </dd>
-
-                        <dt>Frontend</dt>
-                        <dd>React.js · Next.js · React Native</dd>
-
-                        <dt>Métodos &amp; práticas</dt>
-                        <dd>
-                            TDD · code review · pair programming · rollout
-                            incremental · migração de legado (strangler fig) ·
-                            otimização de banco de dados · FinOps · Scrum
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="experiencia">
-                    <h2>Experiência</h2>
-
-                    <article class="job">
-                        <h3>
-                            MSCLTDA — Desenvolvedor Freelance · Consultor de
-                            Engenharia de Software
-                        </h3>
-                        <p class="when">Fev 2016 – Presente · Remoto · PJ</p>
-                        <p class="ctx">
-                            Atuação autônoma contínua desde 2016 — part-time em
-                            paralelo aos vínculos principais, em tempo integral
-                            entre Fev e Dez/2025. Interlocução direta com
-                            fundadores e donos de negócio: escopo, estimativa,
-                            negociação de prazo e responsabilidade direta pelo
-                            resultado em produção.
-                        </p>
-                        <ul>
-                            <li>
-                                <strong
-                                    >Consultoria em pagamentos, escala e custo
-                                    (2024–25):</strong
-                                >
-                                performance em plataforma de pagamentos Pix
-                                (Laravel + Livewire) — análise e reescrita de
-                                queries, indexação, refactor incremental da
-                                estrutura de dados e redução do volume de dados
-                                trafegados entre client e server
-                            </li>
-                            <li>
-                                Estabilização e otimização de gateway de
-                                pagamentos white-label multi-tenant:
-                                redimensionamento de infraestrutura Kubernetes,
-                                otimização de banco (queries, índices, cache),
-                                processamento assíncrono via filas e redução de
-                                custo de nuvem (FinOps)
-                            </li>
-                            <li>
-                                Arquitetura e desenvolvimento de gateway de
-                                pagamentos multi-moeda para o mercado LATAM:
-                                múltiplos métodos de pagamento locais, carteira
-                                multi-moeda, câmbio interno, ledger
-                                (double-entry accounting) e saques em BRL/USD
-                            </li>
-                            <li>
-                                Arquitetura e desenvolvimento das features
-                                iniciais de checkout para sub-adquirente
-                                entrante — backend em Kotlin/Spring, frontend em
-                                Next.js
-                            </li>
-                            <li>
-                                <strong
-                                    >SaaS e aplicações web (2020–24):</strong
-                                >
-                                construção e evolução de produtos web do MVP à
-                                operação — React.js no frontend, Node.js no
-                                backend (Express.js, depois NestJS), PostgreSQL
-                                e MySQL
-                            </li>
-                            <li>
-                                <strong
-                                    >Sites institucionais e CMS
-                                    (2016–20):</strong
-                                >
-                                desenvolvimento para pequenos negócios e
-                                agências em PHP (CodeIgniter, Laravel,
-                                WordPress); MVP multiplataforma solo em
-                                ReactJS, React Native e Node.js/PostgreSQL
-                                (2019)
-                            </li>
-                        </ul>
-                        <p class="tech">
-                            Stack: NestJS · TypeScript · Express.js ·
-                            Laravel/PHP · Kotlin/Spring · Next.js · React.js ·
-                            React Native · PostgreSQL · MySQL · RabbitMQ ·
-                            Redis · Docker · Kubernetes · AWS
-                        </p>
-                    </article>
-
-                    <article class="job">
-                        <h3>PSW Digital — Desenvolvedor Backend Sênior</h3>
-                        <p class="when">Dez 2025 – Presente · Remoto · PJ</p>
-                        <p class="ctx">
-                            Alocado em cliente do mercado financeiro e de
-                            crédito. Sistema de conciliação de dados
-                            financeiros em alto volume.
-                        </p>
-                        <ul>
-                            <li>
-                                Desenvolvimento de fluxos de conciliação de
-                                dados a partir de múltiplas fontes (APIs de
-                                terceiros, arquivos CNAB, MySQL, Databricks),
-                                com processamento assíncrono via filas
-                                (BullMQ/Redis) e consistência transacional
-                            </li>
-                            <li>
-                                Migração de core bancário de operações de
-                                crédito aplicando desacoplamento e
-                                encapsulamento (SOLID, Hexagonal / Ports &amp;
-                                Adapters), com entrega incremental sem downtime
-                            </li>
-                            <li>
-                                Definição de padrões de arquitetura, code
-                                review e pair programming em time sênior
-                            </li>
-                        </ul>
-                        <p class="tech">
-                            Stack: NestJS · TypeScript · PostgreSQL ·
-                            BullMQ/Redis · MySQL · Databricks · Docker ·
-                            Kubernetes · GitHub Actions · Datadog
-                        </p>
-                    </article>
-
-                    <article class="job">
-                        <h3>Woba — Desenvolvedor Backend Sênior</h3>
-                        <p class="when">Nov 2023 – Fev 2025 · Remoto</p>
-                        <p class="ctx">
-                            Startup B2B (real estate / workspace). Modernização
-                            de um monólito legado (~10 anos, Node.js v0.12) e
-                            construção de novos modelos de receita.
-                        </p>
-                        <ul>
-                            <li>
-                                Migração incremental de fluxos de Bookings do
-                                monólito legado para arquitetura modular em
-                                NestJS (strangler fig), sem downtime
-                            </li>
-                            <li>
-                                Introdução, por iniciativa própria, de testes
-                                automatizados (e2e) e cultura de TDD no legado
-                            </li>
-                            <li>
-                                Participação no design e na arquitetura de um
-                                novo modelo de assinatura baseado em créditos e
-                                pagamento up-front para clientes B2B
-                            </li>
-                            <li>
-                                Consolidação de microsserviços satélite no
-                                monólito modular
-                            </li>
-                        </ul>
-                        <p class="tech">
-                            Stack: NestJS · TypeScript · MySQL · MongoDB ·
-                            RabbitMQ · AWS · Kubernetes · OpenTelemetry /
-                            Elastic APM
-                        </p>
-                    </article>
-
-                    <article class="job">
-                        <h3>Wiser Educação — Desenvolvedor Back-end</h3>
-                        <p class="when">Mar 2021 – Nov 2023 · Remoto</p>
-                        <p class="ctx">
-                            Gateway de pagamentos interno de alto volume,
-                            certificado PCI DSS — do desenho inicial à evolução
-                            contínua em produção.
-                        </p>
-                        <ul>
-                            <li>
-                                Desenvolvimento de microsserviços (NestJS,
-                                PostgreSQL, Apache Kafka) aplicando Clean
-                                Architecture, Arquitetura Hexagonal e CQRS
-                            </li>
-                            <li>
-                                Certificação PCI DSS inicial e manutenção da
-                                conformidade ao longo de 2 ciclos de
-                                recertificação
-                            </li>
-                            <li>
-                                Integração com adquirentes (Rede, GetNet,
-                                Stone, Adyen), Mastercard e Vodafone
-                                M-Pesa/Moçambique — cartão de crédito, boleto,
-                                Pix e métodos de pagamento africanos; sistema
-                                de assinatura e cobrança recorrente
-                            </li>
-                            <li>
-                                Consolidação de ~15 microsserviços em 5 módulos
-                                coesos, com rollout incremental e migração de
-                                dados via mensageria (write-first → read →
-                                cutover por serviço)
-                            </li>
-                            <li>
-                                Condução da migração de cofres de cartão e
-                                assinaturas de fornecedor externo (Vindi) para
-                                a plataforma interna, com recuperação de dados
-                                e adaptações no Salesforce
-                            </li>
-                            <li>
-                                Referência técnica do time: decisões de
-                                arquitetura, code review e apoio às decisões da
-                                squad
-                            </li>
-                        </ul>
-                        <p class="tech">
-                            Stack: NestJS · TypeScript · PostgreSQL · Apache
-                            Kafka · RabbitMQ · Kubernetes · Elastic APM
-                        </p>
-                    </article>
-
-                    <article class="job">
-                        <h3>Experiência anterior</h3>
-                        <p class="when">
-                            2015 – 2021 · Compass UOL · Nav9 · Hostche · CIGAM ·
-                            SERTEC · Senac-RS
-                        </p>
-                        <ul>
-                            <li>
-                                <strong
-                                    >Software Developer (Compass UOL,
-                                    2020–2021):</strong
-                                >
-                                fluxos de diálogo para chatbot enterprise
-                                (Microsoft Bot Framework, Azure) e prototipação
-                                de plataforma low-code interna — NestJS,
-                                TypeScript, React.js, MongoDB
-                            </li>
-                            <li>
-                                <strong
-                                    >Full Stack Developer (Nav9,
-                                    2019–2020):</strong
-                                >
-                                manutenção e evolução de aplicação Django em
-                                produção, com ciclo completo de entrega em
-                                squad enxuta e contato direto com o cliente —
-                                Python, Django, React.js, PostgreSQL
-                            </li>
-                            <li>
-                                <strong
-                                    >Web Developer (Hostche, 2019):</strong
-                                >
-                                sites institucionais com CMS próprio em
-                                PHP/CodeIgniter e introdução de Git/GitLab +
-                                code review no time, substituindo deploy via
-                                FTP
-                            </li>
-                            <li>
-                                <strong
-                                    >Suporte técnico e coordenação de TI
-                                    (CIGAM, SERTEC, Senac-RS,
-                                    2015–2019):</strong
-                                >
-                                queries e correções em PostgreSQL, debugging de
-                                ERP (VB6/.Net), administração de servidores
-                                Windows/Linux on-premise e AWS, transformação
-                                digital de processos
-                            </li>
-                        </ul>
-                    </article>
-
-                    <p class="tech">
-                        Esse é um recorte. O histórico completo está no
-                        <a
-                            href="./cv-marcos-camargo.pdf"
-                            download="cv-marcos-camargo-backend-senior.pdf"
-                            >currículo</a
-                        >.
-                    </p>
-                </section>
-
-                <section id="formacao">
-                    <h2>Formação e idiomas</h2>
-                    <dl class="specs">
-                        <dt>Graduação</dt>
-                        <dd>
-                            Análise e Desenvolvimento de Sistemas — UniSenac RS
-                            — em andamento, conclusão prevista 2º sem/2029
-                        </dd>
-
-                        <dt>Técnico</dt>
-                        <dd>
-                            Técnico em Informática — Senac-RS (PRONATEC) — 2015
-                        </dd>
-
-                        <dt>Idiomas</dt>
-                        <dd>
-                            Português nativo · Inglês profissional (leitura e
-                            escrita técnica), conversação intermediária
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="contato">
-                    <h2>Contato</h2>
-                    <p>
-                        Aberto a oportunidades remotas como PJ ou CLT no
-                        Brasil.
-                    </p>
-                    <p class="links">
-                        <a
-                            class="btn"
-                            href="mailto:mscamargo.dev@gmail.com"
-                            >mscamargo.dev@gmail.com</a
-                        >
-                        <a
-                            class="btn"
-                            href="./cv-marcos-camargo.pdf"
-                            download="cv-marcos-camargo-backend-senior.pdf"
-                            >Currículo (PDF)</a
-                        >
-                    </p>
-                </section>
-            </main>
-
-            <footer>
-                © 2026 Marcos Camargo ·
-                <a href="https://github.com/mscamargo/mscamargo.dev" rel="noopener"
-                    >fonte</a
-                >
-                · HTML e CSS, um arquivo, sem JavaScript
-            </footer>
-        </div>
+                btn.addEventListener("click", function () {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(email).then(confirmed, function () {
+                            if (legacyCopy()) confirmed();
+                            else window.location.href = "mailto:" + email;
+                        });
+                    } else if (legacyCopy()) {
+                        confirmed();
+                    } else {
+                        window.location.href = "mailto:" + email;
+                    }
+                });
+            })();
+        </script>
     </body>
 </html>
