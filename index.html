@@ -11,7 +11,6 @@
         />
         <meta name="author" content="Marcos Camargo" />
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#12002b" />
         <link rel="canonical" href="https://mscamargo.dev/" />
 
         <meta property="og:type" content="website" />
@@ -36,7 +35,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;800&display=swap"
         />
 
         <script type="application/ld+json">
@@ -58,367 +57,103 @@
 
         <style>
             :root {
-                --night: #12002b;
-                --pink: 255, 62, 158;
-                --cyan: 60, 232, 255;
-                --mint: 120, 255, 190;
-                /* the horizon sits here; sun, grid and glow all key off it */
-                --horizon: 66%;
+                --background: #000;
+                --foreground: #ededed;
+                --gray-600: #8f8f8f;
+                --border: #2e2e2e;
+                --focus: #52a8ff;
             }
 
             *,
             *::before,
             *::after {
                 box-sizing: border-box;
-            }
-
-            html {
-                background: var(--night);
+                margin: 0;
+                padding: 0;
             }
 
             body {
-                margin: 0;
                 min-height: 100svh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-between;
-                padding: clamp(2.5rem, 15vh, 8rem) clamp(1.25rem, 6vw, 4rem)
-                    clamp(2.5rem, 8vh, 5rem);
-                /* no background here: it would paint over .scene, which sits
-                   at a negative z-index in the root stacking context */
-                color: #f4ecff;
-                font-family: "Orbitron", system-ui, -apple-system, "Segoe UI",
-                    Roboto, sans-serif;
-                overflow: hidden;
-                -webkit-text-size-adjust: 100%;
+                display: grid;
+                place-items: center;
+                padding: 24px;
+                background: var(--background);
+                color: var(--foreground);
+                font-family: "Geist", ui-sans-serif, system-ui, -apple-system,
+                    "Segoe UI", Helvetica, Arial, sans-serif;
+                -webkit-font-smoothing: antialiased;
             }
-
-            /* ---------- the scene ---------- */
-
-            .scene {
-                position: fixed;
-                inset: 0;
-                z-index: -1;
-                overflow: hidden;
-                pointer-events: none;
-                /* dusk: near-black overhead, warming down to the horizon */
-                background:
-                    radial-gradient(
-                        120% 62% at 50% var(--horizon),
-                        rgba(var(--pink), 0.34),
-                        transparent 70%
-                    ),
-                    linear-gradient(180deg, #07000f 0%, #250046 42%, #4b0a5e 62%, #12002b 62%);
-            }
-
-            /* the sun, sliced by bands that widen as they fall */
-            .sun {
-                position: absolute;
-                left: 50%;
-                top: var(--horizon);
-                width: min(64vw, 46vh, 30rem);
-                aspect-ratio: 1;
-                transform: translate(-50%, -76%);
-                border-radius: 50%;
-                background: linear-gradient(
-                    180deg,
-                    #fff2a8 0%,
-                    #ffd166 22%,
-                    #ff7ac0 62%,
-                    #b14aff 100%
-                );
-                -webkit-mask-image: var(--slices);
-                mask-image: var(--slices);
-                --slices: linear-gradient(
-                    180deg,
-                    #000 0 54%,
-                    transparent 54% 56%,
-                    #000 56% 65%,
-                    transparent 65% 68%,
-                    #000 68% 76%,
-                    transparent 76% 80%,
-                    #000 80% 87%,
-                    transparent 87% 92%,
-                    #000 92% 100%
-                );
-                filter: drop-shadow(0 0 3rem rgba(var(--pink), 0.55));
-            }
-
-            /* the grid floor, laid flat under the horizon and running away */
-            .grid {
-                position: absolute;
-                left: -60%;
-                right: -60%;
-                top: var(--horizon);
-                bottom: -20%;
-                transform: perspective(18rem) rotateX(76deg);
-                transform-origin: top center;
-                background-image:
-                    repeating-linear-gradient(
-                        90deg,
-                        rgba(var(--cyan), 0.55) 0 2px,
-                        transparent 2px 5rem
-                    ),
-                    repeating-linear-gradient(
-                        0deg,
-                        rgba(var(--cyan), 0.55) 0 2px,
-                        transparent 2px 5rem
-                    );
-                -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%);
-                mask-image: linear-gradient(180deg, transparent, #000 18%);
-                animation: run 2.6s linear infinite;
-            }
-
-            @keyframes run {
-                to {
-                    background-position:
-                        0 5rem,
-                        0 5rem;
-                }
-            }
-
-            /* the hot line where floor meets sky */
-            .horizon {
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: var(--horizon);
-                height: 1px;
-                background: rgba(var(--cyan), 0.8);
-                box-shadow:
-                    0 0 1rem rgba(var(--cyan), 0.7),
-                    0 0 4rem rgba(var(--pink), 0.5);
-            }
-
-            /* CRT scanlines over everything */
-            .scene::after {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: repeating-linear-gradient(
-                    180deg,
-                    rgba(0, 0, 0, 0.22) 0 1px,
-                    transparent 1px 3px
-                );
-            }
-
-            /* ---------- the type ---------- */
 
             main {
-                position: relative;
-                text-align: center;
-                max-width: 100%;
+                width: min(100%, 560px);
+                border: 1px solid var(--border);
             }
 
             h1 {
-                margin: 0;
-                font-weight: 900;
+                padding: clamp(28px, 7vw, 48px) clamp(16px, 5vw, 40px);
+                font-size: clamp(2rem, 11vw, 3.75rem);
+                font-weight: 800;
+                line-height: 1.05;
+                letter-spacing: -0.03em;
+                text-align: center;
                 text-transform: uppercase;
-                font-size: clamp(1.9rem, 9.4vw, 5rem);
-                line-height: 1.1;
-                letter-spacing: -0.01em;
-                /* chrome: lit along the top, cut by a hard line, cooling out */
-                background: linear-gradient(
-                    180deg,
-                    #ffffff 0%,
-                    #cfe9ff 40%,
-                    #ff8fd0 52%,
-                    #ff3e9e 100%
-                );
-                background-size: 100% 50%;
-                background-repeat: repeat-y;
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-                -webkit-text-fill-color: transparent;
-                filter: drop-shadow(0 0 1.2rem rgba(var(--pink), 0.55))
-                    drop-shadow(0 2px 0 rgba(var(--cyan), 0.35));
+                text-wrap: balance;
             }
 
-            /* down on the grid, clear of the sun */
-            .links {
-                position: relative;
+            nav {
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: clamp(1.25rem, 5vw, 3rem);
-                font-size: clamp(0.66rem, 1.5vw, 0.8rem);
-                font-weight: 600;
-                letter-spacing: 0.22em;
-                text-transform: uppercase;
+                justify-content: space-between;
+                gap: 12px;
+                padding: 10px clamp(12px, 3vw, 16px);
+                border-top: 1px solid var(--border);
             }
 
-            .link {
-                padding: 0;
-                border: 0;
-                background: none;
-                color: rgba(var(--cyan), 0.85);
-                font: inherit;
-                letter-spacing: inherit;
-                text-transform: inherit;
+            a {
+                color: var(--gray-600);
+                font-size: 0.75rem;
+                font-weight: 500;
+                letter-spacing: 0.06em;
                 text-decoration: none;
-                white-space: nowrap;
-                cursor: pointer;
-                text-shadow: 0 0 0.75rem rgba(var(--cyan), 0.35);
-                transition:
-                    color 0.2s ease,
-                    text-shadow 0.2s ease;
+                text-transform: uppercase;
+                transition: color 0.15s ease;
             }
 
-            .link:hover,
-            .link:focus-visible {
-                outline: none;
-                color: #ffffff;
-                text-shadow:
-                    0 0 0.75rem rgba(var(--pink), 0.9),
-                    0 0 2rem rgba(var(--pink), 0.5);
+            a:hover,
+            a:focus-visible {
+                color: var(--foreground);
             }
 
-            .link.copied,
-            .link.copied:hover {
-                color: rgb(var(--mint));
-                text-shadow:
-                    0 0 0.75rem rgba(var(--mint), 0.8),
-                    0 0 2rem rgba(var(--mint), 0.4);
-            }
-
-            .sr-status {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                margin: -1px;
-                padding: 0;
-                border: 0;
-                overflow: hidden;
-                clip: rect(0 0 0 0);
-                white-space: nowrap;
-            }
-
-            /* a laptop in landscape has no room for type, sun and floor at
-               full size — pull all three in rather than let them overlap */
-            @media (max-height: 620px) {
-                body {
-                    padding-top: clamp(1.5rem, 6vh, 3rem);
-                }
-
-                h1 {
-                    font-size: clamp(1.5rem, 6.4vw, 3rem);
-                }
-
-                .sun {
-                    width: min(46vw, 34vh, 18rem);
-                }
+            a:focus-visible {
+                outline: 1px solid var(--focus);
+                outline-offset: 4px;
             }
 
             @media (prefers-reduced-motion: reduce) {
-                .grid {
-                    animation: none;
-                }
-
-                .link {
+                a {
                     transition: none;
                 }
             }
         </style>
     </head>
     <body>
-        <div class="scene" aria-hidden="true">
-            <div class="sun"></div>
-            <div class="grid"></div>
-            <div class="horizon"></div>
-        </div>
-
         <main>
-            <h1>think twice,<br />code once.</h1>
-        </main>
+            <h1>Think twice,<br />code once.</h1>
 
-        <footer>
-            <nav class="links" aria-label="Profiles and contact">
+            <nav>
                 <a
-                    class="link"
                     href="https://www.linkedin.com/in/mscamargo/"
                     target="_blank"
-                    rel="noopener"
-                    >linkedin</a
+                    rel="noopener noreferrer"
+                    >LinkedIn</a
                 >
-
                 <a
-                    class="link"
                     href="https://github.com/mscamargo"
                     target="_blank"
-                    rel="noopener"
-                    >github</a
+                    rel="noopener noreferrer"
+                    >GitHub</a
                 >
-
-                <button
-                    class="link"
-                    type="button"
-                    id="email-btn"
-                    data-email="mscamargo.dev@gmail.com"
-                    title="mscamargo.dev@gmail.com"
-                    aria-label="Copy email mscamargo.dev@gmail.com"
-                >
-                    e-mail
-                </button>
+                <a href="mailto:mscamargo.dev@gmail.com">E-mail</a>
             </nav>
-
-            <p class="sr-status" role="status" aria-live="polite"></p>
-        </footer>
-
-        <script>
-            (function () {
-                var btn = document.getElementById("email-btn");
-                var status = document.querySelector(".sr-status");
-                var email = btn.dataset.email;
-                var label = btn.textContent;
-                var timer;
-
-                function confirmed() {
-                    btn.classList.add("copied");
-                    btn.textContent = "copied";
-                    status.textContent = "Email copied";
-                    clearTimeout(timer);
-                    timer = setTimeout(function () {
-                        btn.classList.remove("copied");
-                        btn.textContent = label;
-                        status.textContent = "";
-                    }, 1800);
-                }
-
-                function legacyCopy() {
-                    var input = document.createElement("input");
-                    input.value = email;
-                    input.setAttribute("readonly", "");
-                    input.style.position = "fixed";
-                    input.style.opacity = "0";
-                    document.body.appendChild(input);
-                    input.select();
-                    var ok = false;
-                    try {
-                        ok = document.execCommand("copy");
-                    } catch (e) {
-                        ok = false;
-                    }
-                    document.body.removeChild(input);
-                    return ok;
-                }
-
-                btn.addEventListener("click", function () {
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard
-                            .writeText(email)
-                            .then(confirmed, function () {
-                                if (legacyCopy()) confirmed();
-                                else window.location.href = "mailto:" + email;
-                            });
-                    } else if (legacyCopy()) {
-                        confirmed();
-                    } else {
-                        window.location.href = "mailto:" + email;
-                    }
-                });
-            })();
-        </script>
+        </main>
     </body>
 </html>
