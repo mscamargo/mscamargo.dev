@@ -11,7 +11,7 @@
         />
         <meta name="author" content="Marcos Camargo" />
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#08080c" />
+        <meta name="theme-color" content="#05010f" />
         <link rel="canonical" href="https://mscamargo.dev/" />
 
         <meta property="og:type" content="website" />
@@ -33,14 +33,10 @@
         <link rel="apple-touch-icon" href="icon-192.png" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossorigin
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Chakra+Petch:wght@500;600&display=swap"
         />
 
         <script type="application/ld+json">
@@ -62,15 +58,14 @@
 
         <style>
             :root {
-                --bg: #08080c;
-                --fg: #eef1f4;
-                --muted: #8a8a99;
+                --fg: #f4f0ff;
+                --cyan: #22e8ff;
+                --magenta: #ff2fd0;
+                --violet: #b14cff;
+                --mint: #6bffb0;
 
-                /* cyan accent, used sparingly */
-                --tube: #2de2ff;
-                --glow: #0bd7ff;
-                --tube-dim: rgba(45, 226, 255, 0.28);
-                --ok: #6bffb0;
+                /* the horizon sits here; the scene layers key off it */
+                --horizon: 58%;
             }
 
             *,
@@ -83,99 +78,293 @@
                 margin: 0;
                 min-height: 100svh;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                padding: 48px 20px;
-                background: var(--bg);
+                padding: 40px 20px;
+                background: #05010f;
                 color: var(--fg);
                 text-align: center;
                 overflow-x: hidden;
-                font-family:
-                    system-ui,
-                    -apple-system,
-                    "Segoe UI",
-                    Roboto,
-                    "Helvetica Neue",
-                    Arial,
-                    sans-serif;
+                font-family: "Chakra Petch", system-ui, sans-serif;
                 -webkit-text-size-adjust: 100%;
             }
 
-            /* faint radial wash behind the content, static */
-            body::before {
-                content: "";
+            /* ---------- retrowave scene ---------- */
+
+            .scene {
                 position: fixed;
                 inset: 0;
-                z-index: -1;
-                background: radial-gradient(
-                    55% 45% at 50% 44%,
-                    rgba(11, 215, 255, 0.04),
-                    transparent 70%
+                z-index: 0;
+                overflow: hidden;
+                background: linear-gradient(
+                    180deg,
+                    #05010f 0%,
+                    #100430 24%,
+                    #2a0950 42%,
+                    #5c1068 52%,
+                    #a8176f 57.4%,
+                    #180432 58%,
+                    #08021c 100%
                 );
             }
 
-            main {
+            .stars {
+                position: absolute;
+                inset: 0 0 42% 0;
+                -webkit-mask-image: linear-gradient(
+                    180deg,
+                    #000 0%,
+                    transparent 88%
+                );
+                mask-image: linear-gradient(180deg, #000 0%, transparent 88%);
+            }
+
+            /* one dot, multiplied by box-shadow */
+            .stars::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 2px;
+                height: 2px;
+                border-radius: 50%;
+                background: #fff;
+                box-shadow:
+                    5vw 12vh 0 -0.5px #fff, 14vw 5vh 0 0 rgba(255, 255, 255, 0.7),
+                    23vw 22vh 0 -0.5px #fff, 31vw 9vh 0 0 rgba(255, 255, 255, 0.6),
+                    38vw 27vh 0 -0.5px rgba(255, 255, 255, 0.8),
+                    46vw 4vh 0 0 #fff, 52vw 17vh 0 -0.5px rgba(255, 255, 255, 0.7),
+                    61vw 8vh 0 0 rgba(255, 255, 255, 0.55),
+                    68vw 24vh 0 -0.5px #fff, 74vw 13vh 0 0 rgba(255, 255, 255, 0.75),
+                    81vw 6vh 0 -0.5px rgba(255, 255, 255, 0.6),
+                    88vw 19vh 0 0 #fff, 95vw 11vh 0 -0.5px rgba(255, 255, 255, 0.7),
+                    9vw 30vh 0 0 rgba(255, 255, 255, 0.5),
+                    27vw 34vh 0 -0.5px rgba(255, 255, 255, 0.65),
+                    43vw 37vh 0 0 rgba(255, 255, 255, 0.45),
+                    58vw 32vh 0 -0.5px rgba(255, 255, 255, 0.6),
+                    71vw 39vh 0 0 rgba(255, 255, 255, 0.4),
+                    85vw 35vh 0 -0.5px rgba(255, 255, 255, 0.55),
+                    18vw 16vh 0 0 rgba(255, 255, 255, 0.5),
+                    35vw 14vh 0 -0.5px rgba(255, 255, 255, 0.6),
+                    64vw 2vh 0 0 rgba(255, 255, 255, 0.5),
+                    92vw 29vh 0 -0.5px rgba(255, 255, 255, 0.45);
+            }
+
+            /* the sun: gradient disc, sliced into bands below its midline */
+            .sun {
+                position: absolute;
+                left: 50%;
+                top: var(--horizon);
+                width: min(26rem, 72vw);
+                aspect-ratio: 1;
+                transform: translate(-50%, -72%);
+                border-radius: 50%;
+                opacity: 0.92;
+                background: linear-gradient(
+                    180deg,
+                    #ffdd8f 0%,
+                    #ff9c46 32%,
+                    #ff4f86 66%,
+                    var(--magenta) 90%,
+                    var(--violet) 100%
+                );
+                /* layers union by default (mask-composite: add) */
+                -webkit-mask-image:
+                    linear-gradient(180deg, #000 0 50%, transparent 50%),
+                    repeating-linear-gradient(
+                        180deg,
+                        #000 0 10px,
+                        transparent 10px 17px
+                    );
+                mask-image:
+                    linear-gradient(180deg, #000 0 50%, transparent 50%),
+                    repeating-linear-gradient(
+                        180deg,
+                        #000 0 10px,
+                        transparent 10px 17px
+                    );
+            }
+
+            .horizon {
+                position: absolute;
+                left: -5%;
+                right: -5%;
+                top: var(--horizon);
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--magenta) 22%,
+                    #ffd9f4 50%,
+                    var(--cyan) 78%,
+                    transparent
+                );
+                box-shadow:
+                    0 0 18px rgba(255, 47, 208, 0.8),
+                    0 0 48px rgba(34, 232, 255, 0.45);
+            }
+
+            /* perspective floor grid */
+            .floor {
+                position: absolute;
+                left: -50%;
+                right: -50%;
+                top: var(--horizon);
+                height: 100vh;
+                background-image:
+                    repeating-linear-gradient(
+                        90deg,
+                        rgba(34, 232, 255, 0.7) 0 2px,
+                        transparent 2px 4rem
+                    ),
+                    repeating-linear-gradient(
+                        180deg,
+                        rgba(255, 47, 208, 0.6) 0 2px,
+                        transparent 2px 3rem
+                    );
+                background-position:
+                    0 0,
+                    0 0;
+                transform: perspective(45rem) rotateX(72deg);
+                transform-origin: 50% 0%;
+                -webkit-mask-image: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    #000 18%,
+                    #000 78%,
+                    transparent 100%
+                );
+                mask-image: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    #000 18%,
+                    #000 78%,
+                    transparent 100%
+                );
+                animation: floor-run 4s linear infinite;
+            }
+
+            @keyframes floor-run {
+                to {
+                    background-position:
+                        0 0,
+                        0 3rem;
+                }
+            }
+
+            /* CRT scanlines, barely there */
+            .scene::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                background: repeating-linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0.16) 0 1px,
+                    transparent 1px 3px
+                );
+            }
+
+            /* ---------- glass panel ---------- */
+
+            .panel {
+                position: relative;
+                z-index: 1;
+                width: min(44rem, 100%);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: clamp(2.25rem, 7vh, 3.75rem);
+                gap: clamp(1.5rem, 3vh, 2rem);
+                padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem);
+                border-radius: 22px;
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                background: rgba(14, 3, 34, 0.56);
+                -webkit-backdrop-filter: blur(26px) saturate(150%);
+                backdrop-filter: blur(26px) saturate(150%);
+                box-shadow:
+                    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+                    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+                    0 30px 80px -20px rgba(0, 0, 0, 0.75),
+                    0 0 70px -10px rgba(255, 47, 208, 0.28);
             }
 
-            /* Headline: clean display type, neon only as a small accent */
+            @supports not (
+                (backdrop-filter: blur(1px)) or
+                    (-webkit-backdrop-filter: blur(1px))
+            ) {
+                .panel {
+                    background: rgba(20, 6, 42, 0.88);
+                }
+            }
+
             h1 {
                 margin: 0;
-                font-family: "Space Grotesk", system-ui, sans-serif;
-                font-weight: 700;
-                font-size: clamp(2rem, 8vw, 4.25rem);
-                letter-spacing: -0.03em;
-                line-height: 1.1;
-                color: var(--fg);
-                text-shadow: 0 0 14px rgba(11, 215, 255, 0.12);
+                font-family: "Big Shoulders Display", "Chakra Petch", system-ui,
+                    sans-serif;
+                font-weight: 800;
+                font-size: clamp(2.5rem, 9.5vw, 4.75rem);
+                line-height: 0.92;
+                letter-spacing: 0.01em;
+                background: linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #fff0fa 42%,
+                    #ffb0e8 100%
+                );
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                -webkit-text-fill-color: transparent;
+                filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6))
+                    drop-shadow(0 0 24px rgba(255, 47, 208, 0.5));
             }
 
-            /* the trailing period is the one bit of real neon */
+            /* the period stays neon cyan — the one bit of pure neon */
             h1 .dot {
-                color: var(--tube);
+                color: var(--cyan);
+                -webkit-text-fill-color: var(--cyan);
                 text-shadow:
-                    0 0 4px var(--tube),
-                    0 0 12px var(--glow),
-                    0 0 28px var(--glow);
+                    0 0 6px var(--cyan),
+                    0 0 22px rgba(34, 232, 255, 0.8);
             }
 
-            /* Buttons */
+            /* ---------- buttons ---------- */
+
             .btns {
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
                 justify-content: center;
-                gap: 14px 18px;
+                gap: 14px;
             }
 
             .btn {
-                /* both labels share one grid cell so width never jumps */
+                /* both labels share one grid cell so the width never jumps */
                 display: grid;
                 grid-template-areas: "l";
                 place-items: center;
-                padding: 10px 22px;
-                border: 1px solid var(--tube-dim);
-                border-radius: 10px;
-                background: transparent;
-                color: var(--tube-dim);
-                font: inherit;
+                padding: 11px 22px;
+                border-radius: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                background: rgba(255, 255, 255, 0.07);
+                color: rgba(244, 240, 255, 0.82);
+                font-family: inherit;
+                font-weight: 500;
                 font-size: 0.95rem;
-                letter-spacing: 0.02em;
+                letter-spacing: 0.04em;
                 text-decoration: none;
                 cursor: pointer;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
                 transition:
-                    color 0.18s ease,
-                    border-color 0.18s ease,
-                    box-shadow 0.18s ease;
+                    color 0.2s ease,
+                    border-color 0.2s ease,
+                    background-color 0.2s ease,
+                    box-shadow 0.2s ease;
             }
 
             .btn > span {
                 grid-area: l;
-                transition: opacity 0.18s ease;
+                transition: opacity 0.2s ease;
             }
 
             .btn .lbl-hover,
@@ -186,12 +375,12 @@
             .btn:hover,
             .btn:focus-visible {
                 outline: none;
-                color: var(--tube);
-                border-color: var(--tube);
+                color: #eafeff;
+                border-color: rgba(34, 232, 255, 0.75);
+                background: rgba(34, 232, 255, 0.13);
                 box-shadow:
-                    0 0 4px rgba(11, 215, 255, 0.5),
-                    0 0 12px rgba(11, 215, 255, 0.35);
-                text-shadow: 0 0 6px rgba(11, 215, 255, 0.45);
+                    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                    0 0 20px rgba(34, 232, 255, 0.35);
             }
 
             .btn:hover .lbl-idle,
@@ -204,14 +393,14 @@
                 opacity: 1;
             }
 
-            /* copied state wins over idle/hover */
+            /* copied wins over idle/hover */
             .btn.copied {
-                color: var(--ok);
-                border-color: var(--ok);
+                color: #eaffee;
+                border-color: rgba(107, 255, 176, 0.75);
+                background: rgba(107, 255, 176, 0.14);
                 box-shadow:
-                    0 0 4px rgba(107, 255, 176, 0.5),
-                    0 0 12px rgba(107, 255, 176, 0.35);
-                text-shadow: 0 0 6px rgba(107, 255, 176, 0.45);
+                    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                    0 0 20px rgba(107, 255, 176, 0.35);
             }
 
             .btn.copied .lbl-idle,
@@ -249,6 +438,10 @@
             }
 
             @media (prefers-reduced-motion: reduce) {
+                .floor {
+                    animation: none;
+                }
+
                 .btn,
                 .btn > span {
                     transition: none;
@@ -257,8 +450,17 @@
         </style>
     </head>
     <body>
-        <main>
-            <h1>think twice, code once<span class="dot">.</span></h1>
+        <div class="scene" aria-hidden="true">
+            <div class="stars"></div>
+            <div class="sun"></div>
+            <div class="horizon"></div>
+            <div class="floor"></div>
+        </div>
+
+        <main class="panel">
+            <h1>
+                think twice,<br />code once<span class="dot">.</span>
+            </h1>
 
             <nav class="btns" aria-label="Profiles and contact">
                 <a
@@ -336,10 +538,12 @@
 
                 btn.addEventListener("click", function () {
                     if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(email).then(confirmed, function () {
-                            if (legacyCopy()) confirmed();
-                            else window.location.href = "mailto:" + email;
-                        });
+                        navigator.clipboard
+                            .writeText(email)
+                            .then(confirmed, function () {
+                                if (legacyCopy()) confirmed();
+                                else window.location.href = "mailto:" + email;
+                            });
                     } else if (legacyCopy()) {
                         confirmed();
                     } else {
