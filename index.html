@@ -60,6 +60,7 @@
                 --background: #000;
                 --foreground: #ededed;
                 --gray-600: #8f8f8f;
+                --gray-100: #0a0a0a;
                 --border: #2e2e2e;
                 --focus: #52a8ff;
             }
@@ -96,13 +97,13 @@
                 line-height: 1.05;
                 letter-spacing: -0.03em;
                 text-align: center;
-                text-transform: uppercase;
+                text-transform: lowercase;
                 text-wrap: balance;
             }
 
             nav {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
                 gap: 12px;
                 padding: 10px clamp(12px, 3vw, 16px);
                 border-top: 1px solid var(--border);
@@ -114,7 +115,7 @@
                 font-weight: 500;
                 letter-spacing: 0.06em;
                 text-decoration: none;
-                text-transform: uppercase;
+                text-transform: lowercase;
                 transition: color 0.15s ease;
             }
 
@@ -128,8 +129,34 @@
                 outline-offset: 4px;
             }
 
+            #toast {
+                position: fixed;
+                left: 50%;
+                bottom: 32px;
+                transform: translate(-50%, 8px);
+                padding: 8px 14px;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                background: var(--gray-100);
+                color: var(--foreground);
+                font-size: 0.75rem;
+                font-weight: 400;
+                letter-spacing: 0.02em;
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.18s ease,
+                    transform 0.18s ease;
+            }
+
+            #toast.is-visible {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
             @media (prefers-reduced-motion: reduce) {
-                a {
+                a,
+                #toast {
                     transition: none;
                 }
             }
@@ -155,5 +182,64 @@
                 <a href="mailto:mscamargo.dev@gmail.com">E-mail</a>
             </nav>
         </main>
+
+        <div id="toast" role="status" aria-live="polite"></div>
+
+        <script>
+            (function () {
+                const link = document.querySelector('a[href^="mailto:"]');
+                const toast = document.getElementById("toast");
+                const email = link.href.replace("mailto:", "");
+                let timer;
+
+                function announce(message) {
+                    toast.textContent = message;
+                    toast.classList.add("is-visible");
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        toast.classList.remove("is-visible");
+                    }, 2000);
+                }
+
+                function legacyCopy(text) {
+                    const field = document.createElement("textarea");
+                    field.value = text;
+                    field.setAttribute("readonly", "");
+                    field.style.position = "fixed";
+                    field.style.opacity = "0";
+                    document.body.appendChild(field);
+                    field.select();
+                    let copied = false;
+                    try {
+                        copied = document.execCommand("copy");
+                    } catch (error) {
+                        copied = false;
+                    }
+                    field.remove();
+                    return copied;
+                }
+
+                async function copy(text) {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        try {
+                            await navigator.clipboard.writeText(text);
+                            return true;
+                        } catch (error) {
+                            /* falls through to the legacy path */
+                        }
+                    }
+                    return legacyCopy(text);
+                }
+
+                link.addEventListener("click", async function (event) {
+                    event.preventDefault();
+                    if (await copy(email)) {
+                        announce("e-mail copied to clipboard");
+                    } else {
+                        window.location.href = link.href;
+                    }
+                });
+            })();
+        </script>
     </body>
 </html>

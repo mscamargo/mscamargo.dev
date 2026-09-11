@@ -17,7 +17,10 @@ three links — linkedin / github / e-mail — spread along the bottom edge.
   `space-between` flex, so the links sit at the left, center and right edges
 - Type scales with `clamp()` on both size and padding, so the card holds its
   proportions from phone width up
-- No JavaScript; linkedin / github open in a new tab, e-mail is a `mailto:`
+- linkedin / github open in a new tab; **e-mail copies the address to the
+  clipboard** and confirms with a small toast, instead of opening a mail
+  client — with an `execCommand` fallback and, if both fail, the `mailto:`
+- ~40 lines of inline JavaScript, only for that copy
 
 ## Development
 
