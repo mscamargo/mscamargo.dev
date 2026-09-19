@@ -92,9 +92,21 @@ export default function Home() {
                 <span className="text-base font-medium tracking-[-0.012em]">{link.title}</span>
                 <span className="truncate font-mono text-[11.5px] text-muted">{link.label}</span>
               </span>
-              <span className="text-[15px] text-muted-strong" aria-hidden>
-                {link.external ? "↗" : "→"}
-              </span>
+              {/* SVG rather than ↗/→ glyphs: iOS renders U+2197 as a colour emoji. */}
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-muted-strong"
+                aria-hidden
+              >
+                {link.external ? <path d="M4.5 11.5l7-7M5.5 4.5h6v6" /> : <path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" />}
+              </svg>
             </a>
           ))}
         </nav>
