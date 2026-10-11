@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+import Page from './Page.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+---
+
+<Page title={title} description={description} image={heroImage}>
+	<article>
+		<header class="mb-[clamp(24px,5dvh,48px)] flex flex-col gap-4">
+			<div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11.5px] tracking-[0.1em] text-muted uppercase">
+				<FormattedDate date={pubDate} />
+				{updatedDate && (
+					<span>
+						· Updated <FormattedDate date={updatedDate} />
+					</span>
+				)}
+			</div>
+			<h1 class="m-0 text-[clamp(30px,5.2dvh,44px)] leading-[1.08] font-semibold tracking-[-0.03em] text-balance text-ink-strong [text-shadow:0_1px_1px_rgba(0,0,0,0.35)]">
+				{title}
+			</h1>
+			<p class="m-0 text-lg text-ink-soft">{description}</p>
+		</header>
+
+		{heroImage && (
+			<div class="mb-[clamp(24px,5dvh,48px)] overflow-hidden rounded-[20px] shadow-raised">
+				<Image width={1440} height={720} src={heroImage} alt="" class="block w-full" />
+			</div>
+		)}
+
+		<div class="prose prose-theme max-w-none prose-a:no-underline prose-a:hover:text-accent-hover prose-pre:rounded-[16px] prose-pre:shadow-inset-md prose-img:rounded-[16px]">
+			<slot />
+		</div>
+	</article>
+</Page>
