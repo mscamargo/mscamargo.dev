@@ -1,0 +1,65 @@
+/*
+ * config: everything tweakable lives here, nothing else.
+ * palette: grayscale, 3-digit hex. keep it memorable.
+ */
+:root {
+	--bg: #111;
+	--faint: #888;
+	--dim: #aaa;
+	--fg: #eee;
+	--font-script: 'Hurricane', cursive;
+	--font-mono: 'JetBrains Mono', monospace;
+
+	/* spacing scale (4px base) */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 16px;
+	--space-4: 24px;
+	--space-5: 32px;
+	--space-6: 48px;
+	--space-7: 64px;
+	--space-8: 96px;
+
+	/* type scale */
+	--text-xs: 13px;
+	--text-sm: 14px;
+	--text-md: 16px;
+
+	--gutter: var(--space-3);
+	--page-width: 960px;
+	--content-width: 640px;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--fg);
+	font-family: var(--font-mono);
+	font-size: var(--text-sm);
+	line-height: 1.5;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+/* [key: value] — bright key, dim underlined link */
+.kv a {
+	color: var(--dim);
+	text-decoration: underline;
+	text-decoration-color: var(--faint);
+	text-underline-offset: 2px;
+}
+.kv a:hover {
+	color: var(--fg);
+	text-decoration-color: var(--fg);
+}
+a:focus-visible {
+	outline: 2px solid var(--fg);
+	outline-offset: 4px;
+	border-radius: 2px;
+}

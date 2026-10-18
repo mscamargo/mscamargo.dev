@@ -1,16 +1,222 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { posts } from '../data/posts';
+
+const links = [
+	{ key: 'g', label: '@mscamargo', href: 'https://github.com/mscamargo' },
+	{ key: 'x', label: '@by_mscamargo', href: 'https://x.com/by_mscamargo' },
+	{ key: 'y', label: '@mscamargo', href: 'https://youtube.com/@mscamargo' },
+	{ key: 'l', label: 'mscamargo', href: 'https://linkedin.com/in/mscamargo' },
+	{ key: 'c', label: 'cases', href: '/cases' },
+	{ key: 'r', label: 'resume', href: '/resume' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+	<main>
+		<header>
+			<h1>Marcos S. Camargo</h1>
+			<p class="tagline">
+				I <a href="https://mscamargo.com">help companies</a> scale their platforms
+				without scaling costs, incidents or complexity.
+			</p>
+			<nav>
+				{
+					links.map((l) => (
+						<span class="kv">
+							[{l.key}: <a href={l.href} data-key={l.key}>{l.label}</a>]
+						</span>
+					))
+				}
+			</nav>
+		</header>
+
+		<section class="posts">
+			{
+				posts.map((p) => (
+					<article class="post">
+						<div class="post-main">
+							<h2>
+								<a href={p.href}>{p.title}</a>
+							</h2>
+							<p>{p.description}</p>
+							<span class="tags">
+								{p.tags.map((t) => (
+									<a href={`/tags/${t}`}>#{t}</a>
+								))}
+							</span>
+						</div>
+						<div class="post-meta">
+							<span>{p.date}</span>
+							<span>{p.readTime}</span>
+						</div>
+					</article>
+				))
+			}
+			<span class="all kv">[a: <a href="/articles" data-key="a">all articles</a>]</span>
+		</section>
+
+		<footer>
+			<small>think twice, code once.</small>
+			<small class="hint">keyboard first. j/k move, t tags, backspace back.</small>
+		</footer>
+	</main>
+</Layout>
+
+<style>
+	main {
+		max-width: calc(var(--page-width) + var(--gutter) * 2);
+		margin: 0 auto;
+		padding: 0 var(--gutter) var(--space-8);
+	}
+	header {
+		text-align: center;
+		padding-top: var(--space-8);
+	}
+	h1 {
+		margin: 0;
+		font-family: var(--font-script);
+		font-weight: 400;
+		font-size: clamp(64px, 12vw, 96px);
+		line-height: 1;
+		text-wrap: balance;
+	}
+	.tagline {
+		margin: var(--space-4) auto var(--space-5);
+		max-width: 36em;
+		font-size: var(--text-md);
+		text-wrap: balance;
+	}
+	.tagline a {
+		text-decoration: underline;
+	}
+	nav {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--space-2) var(--space-5);
+	}
+	.posts,
+	footer {
+		max-width: var(--content-width);
+		margin-inline: auto;
+	}
+	.posts {
+		margin-top: var(--space-8);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-5);
+	}
+	.post {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		gap: var(--space-3);
+	}
+	/* stretch the title link over the whole row */
+	.post h2 a::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+	.post:hover h2 a,
+	.post:has(:focus-visible) h2 a {
+		text-decoration: underline;
+	}
+	/* keyboard focus: the row is the indicator, marked with > in the gutter */
+	.post h2 a:focus-visible {
+		outline: none;
+	}
+	.post:has(:focus-visible)::before {
+		content: '>';
+		position: absolute;
+		top: 0;
+		left: calc(-1 * var(--space-3));
+	}
+	.tags a {
+		position: relative;
+		color: var(--faint);
+	}
+	.tags a:hover {
+		color: var(--fg);
+		text-decoration: none;
+	}
+	h2 {
+		margin: 0;
+		font-size: var(--text-md);
+		font-weight: 700;
+	}
+	.post p {
+		margin: var(--space-1) 0;
+		color: var(--dim);
+	}
+	.tags {
+		display: flex;
+		gap: var(--space-2);
+		font-size: var(--text-xs);
+	}
+	.post-meta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		font-size: var(--text-xs);
+		white-space: nowrap;
+		color: var(--dim);
+	}
+	.post-meta span:last-child {
+		color: var(--faint);
+	}
+	.all {
+		align-self: flex-end;
+	}
+	footer {
+		margin-top: var(--space-8);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-1);
+		text-align: center;
+		color: var(--dim);
+	}
+	footer small {
+		font-size: var(--text-xs);
+		text-wrap: balance;
+	}
+	/* no keyboard on touch devices */
+	@media (hover: none) {
+		.hint {
+			display: none;
+		}
+	}
+	@media (max-width: 560px) {
+		header {
+			padding-top: var(--space-7);
+		}
+		nav {
+			display: grid;
+			grid-template-columns: repeat(2, max-content);
+			gap: var(--space-3) var(--space-6);
+		}
+		main {
+			padding-bottom: var(--space-7);
+		}
+		.posts {
+			margin-top: var(--space-7);
+		}
+		footer {
+			margin-top: var(--space-7);
+		}
+		.post {
+			flex-direction: column-reverse;
+			gap: var(--space-1);
+		}
+		/* date sits above the title on mobile, so drop the marker to the title line */
+		.post:has(:focus-visible)::before {
+			top: var(--space-4);
+		}
+		.post-meta {
+			flex-direction: row;
+			gap: var(--space-3);
+		}
+	}
+</style>

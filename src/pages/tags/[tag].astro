@@ -1,0 +1,10 @@
+---
+import Page from '../../layouts/Page.astro';
+import { tags } from '../../data/posts';
+
+export const getStaticPaths = () => tags.map((tag) => ({ params: { tag } }));
+
+const { tag } = Astro.params;
+---
+
+<Page title={`#${tag}`}><p>Coming soon.</p></Page>
