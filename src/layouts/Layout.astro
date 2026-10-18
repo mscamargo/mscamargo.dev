@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
 
 const {
 	title = 'Marcos S. Camargo',
@@ -24,6 +25,7 @@ const image = new URL('/og.png', Astro.site);
 			rel="stylesheet"
 		/>
 		<title>{title}</title>
+		<Analytics />
 		<meta name="description" content={description} />
 		<link rel="canonical" href={url} />
 		<meta property="og:type" content="website" />
